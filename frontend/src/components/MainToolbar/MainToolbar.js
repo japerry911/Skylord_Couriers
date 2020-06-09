@@ -44,7 +44,6 @@ const MainToolbar = ({ title, onMenuClick }) => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <div className={classes.toolbarMargin} />
         </Fragment>
     );
 };
