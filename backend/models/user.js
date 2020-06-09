@@ -53,7 +53,7 @@ function validateUser(user) {
         username: Joi.string().min(6).max(30).required(),
         password: Joi.string().required().min(5).max(255).required(),
         isShipper: Joi.boolean().required(),
-        isCourier: Joi.boolean().required(),
+        isCourier: Joi.boolean().required().when('isShipper', { is: true, then: Joi.valid(false) }).concat(Joi.boolean().required().when('isShipper', { is: false, then: Joi.valid(true) })),
         city: Joi.string().min(2).max(100).required(),
         state: Joi.string().valid(['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS',
                                     'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY',

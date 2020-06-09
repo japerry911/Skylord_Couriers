@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { validateUser, User } = require('../models/user');
+const auth = require('../middleware/auth');
 const express = require('express');
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.get('/me', auth, async (req, res) => {
     res.send(user);
 });
 
-res.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     const { error } = validateUser(req.body);
 
     if (error) {
@@ -31,7 +32,7 @@ res.post('/', async (req, res) => {
         const result = await user.save();
         const token = user.generateAuthToken();
 
-        res.header('x-auth-token', token).send(_pick(result, '_id', 'username', 'isShipper', 'isCourier', 'city', 'state'));
+        res.header('x-auth-token', token).send(_.pick(result, '_id', 'username', 'isShipper', 'isCourier', 'city', 'state'));
     } catch (error) {
         res.status(400).send(`Server Error: ${error}`);
     }
