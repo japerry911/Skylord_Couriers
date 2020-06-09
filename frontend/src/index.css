@@ -23,6 +23,16 @@ html, body, #div, .app {
   width: 100vw;
 }
 
-header {
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  min-height: calc(100vh - 150px);
+}
+
+header, footer { 
   height: 75px;
+  width: 100%;
 }
