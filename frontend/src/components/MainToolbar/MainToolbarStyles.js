@@ -24,5 +24,8 @@ export const useStyles = makeStyles(theme => ({
     },
     spacerStyle: {
         flex: 1
+    },
+    menuTextStyle: {
+        paddingRight: '2rem'
     }
 }));

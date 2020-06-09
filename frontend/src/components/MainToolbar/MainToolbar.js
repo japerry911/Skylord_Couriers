@@ -30,7 +30,7 @@ const MainToolbar = ({ title, onMenuClick }) => {
                     <Typography
                         variant='h6'
                         color='inherit'
-                        className={classes.flex}
+                        className={classes.menuTextStyle}
                     >
                         {title}
                     </Typography>
