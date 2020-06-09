@@ -14,7 +14,18 @@ export const useStyles = makeStyles(theme => ({
         justifyContent: 'center'
     },
     logoStyle: {
+        width: '100%',
+        height: 'auto'
+    },
+    figureStyle: {
+        width: '100%',
+        height: 'auto'
+    },
+    figureLinkStyle: {
         width: '12%',
         height: 'auto'
+    },
+    spacerStyle: {
+        flex: 1
     }
 }));
