@@ -20,7 +20,7 @@ export const useStyles = makeStyles(theme => ({
         width: '50%',
         color: '#000',
         '&:hover': {
-            backgroundColor: theme.colors.accentLightGray
+            backgroundColor: theme.colors.accentLightOrange
         },
         height: '2.25rem'
     },

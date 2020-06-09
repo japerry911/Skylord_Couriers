@@ -33,7 +33,6 @@ body {
 }
 
 main {
-  padding-top: 1rem;
   min-height: calc(100vh - 150px);
 }
 
