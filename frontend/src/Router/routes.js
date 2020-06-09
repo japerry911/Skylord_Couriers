@@ -4,6 +4,7 @@ import Home from '../pages/Home/Home';
 import About from '../pages/About/About';
 import Contact from '../pages/Contact/Contact';
 import SignIn from '../pages/SignIn/SignIn';
+import SignUp from '../pages/SignUp/SignUp';
 import ScrollToTop from '../misc/ScrollToTop';
 
 export default () => {
@@ -34,6 +35,12 @@ export default () => {
                     exact
                     path='/sign-in'
                     component={SignIn}
+                />
+
+                <Route
+                    exact
+                    path='/sign-up'
+                    component={SignUp}
                 />
             </Switch>
         </Fragment>

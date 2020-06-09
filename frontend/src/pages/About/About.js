@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './AboutStyles';
 
-const About = () => {
+const About = ({ history }) => {
     const classes = useStyles();
 
     return (
@@ -32,6 +32,7 @@ const About = () => {
                 </Grid>
                 <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
                     <Button
+                        onClick={() => history.push('/sign-up')}
                         className={classes.buttonStyle}
                     >
                         Sign Up For Skylord Couriers
