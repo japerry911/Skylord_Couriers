@@ -18,5 +18,12 @@ export const useStyles = makeStyles(theme => ({
     },
     spacerStyle: {
         flex: 1
-    }
+    },
+    listItemStyle: {
+        marginLeft: '2rem',
+        color: '#000',
+        '&:hover': {
+            backgroundColor: theme.colors.accentLightGray
+        }
+    },
 }));
