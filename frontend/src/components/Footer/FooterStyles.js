@@ -8,22 +8,26 @@ export const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center'
     },
-    figureLogoStyle: {
-        width: '12%',
+    logoLinkStyle: {
+        width: '30%',
         height: 'auto'
     },
     logoStyle: {
         width: '100%',
         height: 'auto'
     },
-    spacerStyle: {
-        flex: 1
-    },
     listItemStyle: {
-        marginLeft: '2rem',
+        width: '50%',
         color: '#000',
         '&:hover': {
             backgroundColor: theme.colors.accentLightGray
-        }
+        },
+        height: '2.25rem'
     },
+    listStyle: {
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column'
+    }
 }));
