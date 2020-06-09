@@ -17,3 +17,12 @@ code {
   padding: 0;
   box-sizing: border-box;
 }
+
+html, body, #div, .app {
+  min-height: 100vh;
+  width: 100vw;
+}
+
+header {
+  height: 75px;
+}
