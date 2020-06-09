@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './HomeStyles';
 
-const Home = () => {
+const Home = ({ history }) => {
     const classes = useStyles();
 
     return (
@@ -19,6 +19,7 @@ const Home = () => {
                 <Grid item xs={6} sm={6} md={6} lg={6} xl={6} align='center'>
                     <Button
                         className={classes.buttonStyle}
+                        onClick={() => history.push('/about')}
                     >
                         About Us
                     </Button>
@@ -26,6 +27,7 @@ const Home = () => {
                 <Grid item xs={6} sm={6} md={6} lg={6} xl={6} align='center'>
                     <Button
                         className={classes.buttonStyle}
+                        onClick={() => history.push('/sign-in')}
                     >
                         Sign In
                     </Button>
