@@ -1,4 +1,5 @@
 const users = require('./routes/users');
+const auth = require('./routes/auth');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
@@ -8,6 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 mongoose.connect('mongodb://localhost/skylordCouriers', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true })
     .then(() => console.log('Successfully connected to MongoDB...'))
