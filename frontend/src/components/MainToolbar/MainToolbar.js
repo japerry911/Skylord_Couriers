@@ -12,7 +12,21 @@ const MainToolbar = ({ title, onMenuClick }) => {
     return (
         <Fragment>
             <AppBar>
-                <Toolbar>
+                <Toolbar className={classes.toolbarStyle}>
+                    <figure>
+                        <img
+                            alt='Skylord Couriers Logo'
+                            src='https://skylord-couriers-12395823838.s3.us-east-2.amazonaws.com/Logos/dark_logo_transparent_background.png'
+                            className={classes.logoStyle}
+                        />
+                    </figure>
+                    <Typography
+                        variant='h6'
+                        color='inherit'
+                        className={classes.flex}
+                    >
+                        {title}
+                    </Typography>
                     <IconButton
                         className={classes.menuButton}
                         color='inherit'
@@ -21,13 +35,6 @@ const MainToolbar = ({ title, onMenuClick }) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant='h6'
-                        color='inherit'
-                        className={classes.flex}
-                    >
-                        {title}
-                    </Typography>
                 </Toolbar>
             </AppBar>
             <div className={classes.toolbarMargin} />

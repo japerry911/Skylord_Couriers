@@ -10,6 +10,9 @@ const MainDrawer = ({ open, onClose, setTitle }) => {
 
     return (
         <Drawer 
+            classes={{
+                paper: classes.drawerStyle
+            }}
             variant='temporary' 
             open={open} 
             onClose={onClose}
