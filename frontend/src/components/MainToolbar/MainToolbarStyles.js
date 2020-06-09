@@ -2,8 +2,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles(theme => ({
     menuButton: {
-        marginLeft: -12,
-        marginRight: 20
+        marginRight: '2rem'
     },
     toolbarStyle: {
         display: 'flex',
