@@ -9,7 +9,7 @@ const userReducer = (state=INITIAL_STATE, action) => {
             return { ...state, isLoading: false, error: action.error };
 
         case 'USER_SUCCESS':
-            return { ...state, isLoading: false, user: action.payload };
+            return { ...state, isLoading: false, ...action.payload };
 
         default:
             return state;

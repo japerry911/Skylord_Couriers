@@ -25,11 +25,17 @@ export const userSignUp = formData => {
         dispatch(userPending());
 
         try {
-            console.log('HERE', formData);
-            console.log(await expressServer.post('/api/users', { ...formData }));
-            //console.log('Headers - ', response.headers);
+            const response = await expressServer.post('/api/users', { ...formData });
+            
+            const successObject = {
+                user: response.data,
+                token: response.headers['x-auth-token']
+            };
+
+            dispatch(userSuccess(successObject));
         } catch (error) {
             dispatch(userError(error.response.data));
+            throw Error(error.response.data);
         }
     };
 };

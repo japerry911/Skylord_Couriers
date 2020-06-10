@@ -17,11 +17,8 @@ const SignInSignUp = () => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
-    const useIsLoading = () => useSelector(state => state.user.isLoading);
-    const useError = () => useSelector(state => state.user.error);
-    
-    const isLoading = true;
-    const error = useError();
+    const isLoading = useSelector(state => state.user.isLoading);
+    const error = useSelector(state => state.user.error);
 
     const [signInDialogOpen, setSignInDialogOpen] = useState(false);
     const [signUpDialogOpen, setSignUpDialogOpen] = useState(false);
@@ -66,7 +63,7 @@ const SignInSignUp = () => {
 
     useEffect(() => {
         setValidSignUp(username.length >= 6 && username.length <= 30 && password !== '' && password === confirmPassword && ((isShipper || isCourier) && !(isCourier && isShipper)) &&
-            city.length >= 2 && city.length <= 100 && state.length === 2)
+            city.length >= 2 && city.length <= 100 && state.length === 2 && password.length >= 5 && password.length <= 255)
     }, [username, password, confirmPassword, isShipper, isCourier, city, state]);
 
     const submitSignUpForm = async event => {
@@ -81,12 +78,11 @@ const SignInSignUp = () => {
             state
         };
 
-        console.log('Running...');
-        console.log('Loading - ', isLoading);
-        await dispatch(userSignUp(formData));
-        console.log('Done!');
-        console.log('Error - ', error);
-        console.log('Loading - ', isLoading);
+        try {
+            await dispatch(userSignUp(formData));
+        } catch (error) {
+            console.log('CAUGHT ERROR: ', error);
+        }
     };
 
     return (
