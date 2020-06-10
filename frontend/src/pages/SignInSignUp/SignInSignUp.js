@@ -69,6 +69,8 @@ const SignInSignUp = ({ history }) => {
     const submitSignUpForm = async event => {
         event.preventDefault();
 
+        await onSignUpDialogClose();
+
         const formData = {
             username,
             password,
@@ -88,16 +90,18 @@ const SignInSignUp = ({ history }) => {
             setIsCourier(false);
             setCity('');
             setState('');
-            await onSignUpDialogClose();
 
             dispatch(handleOpen({ type: 'success', message: 'Username Successfully Created.' }));
         } catch (error) {
+            await onSignUpDialogOpen();
             return dispatch(handleOpen({ type: 'error', message: error.message }));
         }
     };
 
     const submitSignInForm = async event => {
         event.preventDefault();
+
+        await onSignInDialogClose();
 
         const formData = {
             username,
@@ -109,12 +113,12 @@ const SignInSignUp = ({ history }) => {
 
             setUsername('');
             setPassword('');
-            await onSignInDialogClose();
 
             dispatch(handleOpen({ type: 'success', message: 'Successfully Logged In' }));
             history.push('/');
         } catch (error) {
-
+            await onSignInDialogOpen();
+            return dispatch(handleOpen({ type: 'error', message: error.message }));
         }
     };
 

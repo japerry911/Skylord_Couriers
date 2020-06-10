@@ -45,7 +45,7 @@ export const userSignIn = formData => {
         dispatch(userPending());
 
         try {
-            const response = await expressServer.pos('/api/auth', { ...formData });
+            const response = await expressServer.post('/api/auth', { ...formData });
 
             const successObject = {
                 user: response.data,
