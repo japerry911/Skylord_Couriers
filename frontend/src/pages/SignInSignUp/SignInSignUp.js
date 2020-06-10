@@ -97,6 +97,21 @@ const SignInSignUp = ({ history }) => {
         }
     };
 
+    const submitSignInForm = async event => {
+        event.preventDefault();
+
+        const formData = {
+            username,
+            password
+        };
+
+        try {
+
+        } catch (error) {
+            
+        }
+    };
+
     return (
         <Fragment>
         {isLoading ? <Fragment>
