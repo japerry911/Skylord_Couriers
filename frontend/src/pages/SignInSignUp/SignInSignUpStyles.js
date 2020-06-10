@@ -4,7 +4,8 @@ export const useStyles = makeStyles(theme => ({
     mainGridStyle: {
         minHeight: '900px',
         width: '100%',
-        backgroundImage: 'url("https://skylord-couriers-12395823838.s3.us-east-2.amazonaws.com/SignIn/white-dump-truck-near-pine-tress-during-daytime-93398.jpg")',
+        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),' +
+            'url("https://skylord-couriers-12395823838.s3.us-east-2.amazonaws.com/SignIn/white-dump-truck-near-pine-tress-during-daytime-93398.jpg")',
         backgroundAttachment: 'fixed',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',

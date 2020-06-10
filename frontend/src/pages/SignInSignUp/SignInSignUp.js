@@ -44,8 +44,8 @@ const SignInSignUp = () => {
         setUsername('');
         setPassword('');
         setConfirmPassword('');
-        setIsShipper('');
-        setIsCourier('');
+        setIsShipper(false);
+        setIsCourier(false);
         setCity('');
         setState('');
     };
@@ -121,7 +121,7 @@ const SignInSignUp = () => {
                     >
                         Sign Up
                     </Button>
-                    <Dialog open={signUpDialogOpen} onClose={onSignUpDialogOpen} disableScrollLock disablePortal>
+                    <Dialog open={signUpDialogOpen} onClose={onSignUpDialogClose} disableScrollLock disablePortal>
                         <DialogTitle>Sign Up</DialogTitle>
                         <DialogContent>
                             <TextField
