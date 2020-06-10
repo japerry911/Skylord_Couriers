@@ -10,10 +10,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSignUp } from '../../redux/actions/userActions';
+import { handleOpen } from '../../redux/actions/toastActions';
 import Spinner from '../../components/Spinner/Spinner';
 import { useStyles } from './SignInSignUpStyles';
 
-const SignInSignUp = () => {
+const SignInSignUp = ({ history }) => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
@@ -75,13 +76,24 @@ const SignInSignUp = () => {
             isShipper,
             isCourier,
             city,
-            state
+            state: state.toString().toUpperCase()
         };
 
         try {
             await dispatch(userSignUp(formData));
+            
+            setUsername('');
+            setPassword('');
+            setConfirmPassword('');
+            setIsShipper(false);
+            setIsCourier(false);
+            setCity('');
+            setState('');
+            await onSignUpDialogClose();
+
+            dispatch(handleOpen({ type: 'success', message: 'Username Successfully Created.' }));
         } catch (error) {
-            console.log('CAUGHT ERROR: ', error);
+            return dispatch(handleOpen({ type: 'error', message: error.message }));
         }
     };
 
