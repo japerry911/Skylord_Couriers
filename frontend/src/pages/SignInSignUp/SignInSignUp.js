@@ -101,7 +101,7 @@ const SignInSignUp = ({ history }) => {
     const submitSignInForm = async event => {
         event.preventDefault();
 
-        await onSignInDialogClose();
+        await onSignInDialogClose(); 
 
         const formData = {
             username,
