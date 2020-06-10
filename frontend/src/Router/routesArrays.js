@@ -2,7 +2,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import PhoneIcon from '@material-ui/icons/Phone';
 import PersonIcon from '@material-ui/icons/Person'
-import AddIcon from '@material-ui/icons/Add';
 
 export const NON_AUTH_ROUTES_ARRAY = [
     { link: '/', title: 'Home', Icon: HomeIcon },
