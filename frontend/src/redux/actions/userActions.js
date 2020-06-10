@@ -39,3 +39,23 @@ export const userSignUp = formData => {
         }
     };
 };
+
+export const userSignIn = formData => {
+    return async dispatch => {
+        dispatch(userPending());
+
+        try {
+            const response = await expressServer.pos('/api/auth', { ...formData });
+
+            const successObject = {
+                user: response.data,
+                token: response.headers['x-auth-token']
+            };
+
+            dispatch(userSuccess(successObject));
+        } catch (error) {
+            dispatch(userError(error.response.data));
+            throw Error(error.response.data);
+        }
+    };
+};

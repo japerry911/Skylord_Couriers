@@ -9,9 +9,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSignUp } from '../../redux/actions/userActions';
+import { userSignUp, userSignIn } from '../../redux/actions/userActions';
 import { handleOpen } from '../../redux/actions/toastActions';
-import Spinner from '../../components/Spinner/Spinner';
+import LoadingOverlay from 'react-loading-overlay';
 import { useStyles } from './SignInSignUpStyles';
 
 const SignInSignUp = ({ history }) => {
@@ -19,7 +19,6 @@ const SignInSignUp = ({ history }) => {
 
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.user.isLoading);
-    const error = useSelector(state => state.user.error);
 
     const [signInDialogOpen, setSignInDialogOpen] = useState(false);
     const [signUpDialogOpen, setSignUpDialogOpen] = useState(false);
@@ -106,170 +105,177 @@ const SignInSignUp = ({ history }) => {
         };
 
         try {
+            await dispatch(userSignIn(formData));
 
+            setUsername('');
+            setPassword('');
+            await onSignInDialogClose();
+
+            dispatch(handleOpen({ type: 'success', message: 'Successfully Logged In' }));
+            history.push('/');
         } catch (error) {
-            
+
         }
     };
 
     return (
         <Fragment>
-        {isLoading ? <Fragment>
-            <div style={{ width: '100%', minHeight: '900px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Spinner />
-            </div>
-        </Fragment>
-        :
-            <Grid container className={classes.mainGridStyle} direction='column' justify='space-evenly' alignItems='center'>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center'>
-                    <img
-                        alt='Skylord Couriers Logo'
-                        src='https://skylord-couriers-12395823838.s3.us-east-2.amazonaws.com/Logos/white_logo_transparent_background.png'
-                        className={classes.logoStyle}
-                    />
-                </Grid>
-                <Grid container item xs={12} sm={12} md={12} lg={12} xl={12} justify='center'>
-                    <Grid item xs={4} sm={4} md={4} lg={4} xl={4} align='center'>
-                        <Button
-                            className={classes.buttonStyle}
-                            onClick={onSignInDialogOpen}
-                        >
-                            Sign In
-                        </Button>
-                        <Dialog open={signInDialogOpen} onClose={onSignInDialogClose} disableScrollLock disablePortal>
-                            <DialogTitle>Sign In</DialogTitle>
-                            <DialogContent>
-                                <TextField
-                                    autoFocus
-                                    margin='normal'
-                                    label='Username'
-                                    InputProps={{ name: 'username' }}
-                                    value={username}
-                                    onChange={e => setUsername(e.target.value)}
-                                    fullWidth
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin='normal'
-                                    label='Password'
-                                    InputProps={{ name: 'password' }}
-                                    value={password}
-                                    fullWidth
-                                    onChange={e => setPassword(e.target.value)}
-                                    type='password'
-                                />
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={onSignInDialogClose} color='primary'>
-                                    Go Back
-                                </Button>
-                                <Button
-                                    variant='contained'
-                                    color='primary'
-                                    onClick={() => alert('Put Action Here')}
-                                    disabled={!validSignIn}
-                                >
-                                    Sign In
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
+            <LoadingOverlay
+                active={isLoading}
+                spinner
+                text='Loading...'
+            >
+                <Grid container className={classes.mainGridStyle} direction='column' justify='space-evenly' alignItems='center'>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center'>
+                        <img
+                            alt='Skylord Couriers Logo'
+                            src='https://skylord-couriers-12395823838.s3.us-east-2.amazonaws.com/Logos/white_logo_transparent_background.png'
+                            className={classes.logoStyle}
+                        />
                     </Grid>
-                    <Grid item xs={4} sm={4} md={4} lg={4} xl={4} align='center'>
-                        <Button
-                            className={classes.buttonStyle}
-                            onClick={onSignUpDialogOpen}
-                        >
-                            Sign Up
-                        </Button>
-                        <Dialog open={signUpDialogOpen} onClose={onSignUpDialogClose} disableScrollLock disablePortal>
-                            <DialogTitle>Sign Up</DialogTitle>
-                            <DialogContent>
-                                <TextField
-                                    autoFocus
-                                    margin='normal'
-                                    label='Username'
-                                    InputProps={{ name: 'username' }}
-                                    value={username}
-                                    onChange={e => setUsername(e.target.value)}
-                                    fullWidth
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin='normal'
-                                    label='Password'
-                                    InputProps={{ name: 'password' }}
-                                    value={password}
-                                    fullWidth
-                                    onChange={e => setPassword(e.target.value)}
-                                    type='password'
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin='normal'
-                                    label='Confirm Password'
-                                    InputProps={{ name: 'confirmPassword' }}
-                                    value={confirmPassword}
-                                    fullWidth
-                                    onChange={e => setConfirmPassword(e.target.value)}
-                                    type='password'
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={isShipper}
-                                            onChange={e => setIsShipper(e.target.checked)}
-                                            color='primary'
-                                        />
-                                    }
-                                    label='Shipper?'
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={isCourier}
-                                            onChange={e => setIsCourier(e.target.checked)}
-                                            color='primary'
-                                        />
-                                    }
-                                    label='Courier?'
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin='normal'
-                                    label='City'
-                                    InputProps={{ name: 'city' }}
-                                    value={city}
-                                    onChange={e => setCity(e.target.value)}
-                                    fullWidth
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin='normal'
-                                    label='State'
-                                    InputProps={{ name: 'state' }}
-                                    value={state}
-                                    onChange={e => setState(e.target.value)}
-                                    fullWidth
-                                    inputProps={{ maxLength: 2 }}
-                                />
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={onSignUpDialogClose} color='primary'>
-                                    Go Back
-                                </Button>
-                                <Button
-                                    variant='contained'
-                                    color='primary'
-                                    onClick={submitSignUpForm}
-                                    disabled={!validSignUp}
-                                >
-                                    Sign Up
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
+                    <Grid container item xs={12} sm={12} md={12} lg={12} xl={12} justify='center'>
+                        <Grid item xs={4} sm={4} md={4} lg={4} xl={4} align='center'>
+                            <Button
+                                className={classes.buttonStyle}
+                                onClick={onSignInDialogOpen}
+                            >
+                                Sign In
+                            </Button>
+                            <Dialog open={signInDialogOpen} onClose={onSignInDialogClose} disableScrollLock disablePortal>
+                                <DialogTitle>Sign In</DialogTitle>
+                                <DialogContent>
+                                    <TextField
+                                        autoFocus
+                                        margin='normal'
+                                        label='Username'
+                                        InputProps={{ name: 'username' }}
+                                        value={username}
+                                        onChange={e => setUsername(e.target.value)}
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin='normal'
+                                        label='Password'
+                                        InputProps={{ name: 'password' }}
+                                        value={password}
+                                        fullWidth
+                                        onChange={e => setPassword(e.target.value)}
+                                        type='password'
+                                    />
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={onSignInDialogClose} color='primary'>
+                                        Go Back
+                                    </Button>
+                                    <Button
+                                        variant='contained'
+                                        color='primary'
+                                        onClick={submitSignInForm}
+                                        disabled={!validSignIn}
+                                    >
+                                        Sign In
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                        </Grid>
+                        <Grid item xs={4} sm={4} md={4} lg={4} xl={4} align='center'>
+                            <Button
+                                className={classes.buttonStyle}
+                                onClick={onSignUpDialogOpen}
+                            >
+                                Sign Up
+                            </Button>
+                            <Dialog open={signUpDialogOpen} onClose={onSignUpDialogClose} disableScrollLock disablePortal>
+                                <DialogTitle>Sign Up</DialogTitle>
+                                <DialogContent>
+                                    <TextField
+                                        autoFocus
+                                        margin='normal'
+                                        label='Username'
+                                        InputProps={{ name: 'username' }}
+                                        value={username}
+                                        onChange={e => setUsername(e.target.value)}
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin='normal'
+                                        label='Password'
+                                        InputProps={{ name: 'password' }}
+                                        value={password}
+                                        fullWidth
+                                        onChange={e => setPassword(e.target.value)}
+                                        type='password'
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin='normal'
+                                        label='Confirm Password'
+                                        InputProps={{ name: 'confirmPassword' }}
+                                        value={confirmPassword}
+                                        fullWidth
+                                        onChange={e => setConfirmPassword(e.target.value)}
+                                        type='password'
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={isShipper}
+                                                onChange={e => setIsShipper(e.target.checked)}
+                                                color='primary'
+                                            />
+                                        }
+                                        label='Shipper?'
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={isCourier}
+                                                onChange={e => setIsCourier(e.target.checked)}
+                                                color='primary'
+                                            />
+                                        }
+                                        label='Courier?'
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin='normal'
+                                        label='City'
+                                        InputProps={{ name: 'city' }}
+                                        value={city}
+                                        onChange={e => setCity(e.target.value)}
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin='normal'
+                                        label='State'
+                                        InputProps={{ name: 'state' }}
+                                        value={state}
+                                        onChange={e => setState(e.target.value)}
+                                        fullWidth
+                                        inputProps={{ maxLength: 2 }}
+                                    />
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={onSignUpDialogClose} color='primary'>
+                                        Go Back
+                                    </Button>
+                                    <Button
+                                        variant='contained'
+                                        color='primary'
+                                        onClick={submitSignUpForm}
+                                        disabled={!validSignUp}
+                                    >
+                                        Sign Up
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>}
+            </LoadingOverlay>
         </Fragment>
     );
 };
