@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,6 +22,8 @@ const SignInSignUp = () => {
     const [isCourier, setIsCourier] = useState(false);
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
+    const [validSignIn, setValidSignIn] = useState(false);
+    const [validSignUp, setValidSignUp] = useState(false);
 
     const onSignInDialogOpen = () => {
         setSignInDialogOpen(true);
@@ -47,6 +49,15 @@ const SignInSignUp = () => {
         setCity('');
         setState('');
     };
+
+    useEffect(() => {
+        setValidSignIn(username && password);
+    }, [username, password]);
+
+    useEffect(() => {
+        setValidSignUp(username.length >= 6 && username.length <= 30 && password !== '' && password === confirmPassword && ((isShipper || isCourier) && !(isCourier && isShipper)) &&
+            city.length >= 2 && city.length <= 100 && state.length === 2)
+    }, [username, password, confirmPassword, isShipper, isCourier, city, state]);
 
     return (
         <Grid container className={classes.mainGridStyle} direction='column' justify='space-evenly' alignItems='center'>
@@ -96,6 +107,7 @@ const SignInSignUp = () => {
                                 variant='contained'
                                 color='primary'
                                 onClick={() => alert('Put Action Here')}
+                                disabled={!validSignIn}
                             >
                                 Sign In
                             </Button>
@@ -189,6 +201,7 @@ const SignInSignUp = () => {
                                 variant='contained'
                                 color='primary'
                                 onClick={() => alert('Put Action Here')}
+                                disabled={!validSignUp}
                             >
                                 Sign Up
                             </Button>
