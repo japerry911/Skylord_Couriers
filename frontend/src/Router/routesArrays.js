@@ -8,6 +8,5 @@ export const NON_AUTH_ROUTES_ARRAY = [
     { link: '/', title: 'Home', Icon: HomeIcon },
     { link: '/about', title: 'About', Icon: InfoIcon },
     { link: '/contact', title: 'Contact', Icon: PhoneIcon },
-    { link: '/sign-in', title: 'Sign In', Icon: PersonIcon },
-    { link: '/sign-up', title: 'Sign Up', Icon: AddIcon }
+    { link: '/sign-in-sign-up', title: 'Sign In / Sign Up', Icon: PersonIcon },
 ];
