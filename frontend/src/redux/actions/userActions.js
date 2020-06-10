@@ -48,8 +48,7 @@ export const userSignIn = formData => {
             const response = await expressServer.post('/api/auth', { ...formData });
 
             const successObject = {
-                user: response.data,
-                token: response.headers['x-auth-token']
+                token: response.data
             };
 
             dispatch(userSuccess(successObject));
