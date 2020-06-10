@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
     const { error } = validateUser(req.body);
 
     if (error) {
+        console.log('here', error);
         const errors = error.details.map(errorObject => errorObject.message);
         return res.status(400).send(`Error(s): ${errors.join(', ')}`);
     }

@@ -22,7 +22,7 @@ code {
   margin-inline-end: 0;
 }
 
-html, body, #div, .app {
+html, body, #root, .app {
   min-height: 100vh;
   width: 100%;
 }

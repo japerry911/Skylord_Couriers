@@ -4,6 +4,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import theme from './misc/theme';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
+import ToastBar from './components/ToastBar/ToastBar';
 import './index.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <main>
           <Routes />
         </main>
+        <ToastBar />
         <footer>
           <Footer />
         </footer>
