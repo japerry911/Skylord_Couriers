@@ -7,11 +7,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { NON_AUTH_ROUTES_ARRAY, AUTH_SHIPPER_ROUTES_ARRAY, AUTH_COURIER_ROUTES_ARRAY } from '../../router/routesArrays';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { userSignOut } from '../../redux/actions/userActions';
 
 const MainDrawer = ({ open, onClose, setTitle }) => {
     const classes = useStyles();
     
+    const dispatch = useDispatch();
     const authed = useSelector(state => state.user.authed);
     const user = useSelector(state => state.user.user);
 
@@ -82,6 +85,19 @@ const MainDrawer = ({ open, onClose, setTitle }) => {
                         </ListItem>
                     );
                 })}
+                {authed
+                ?
+                <ListItem
+                    button
+                    onClick={() => dispatch(userSignOut())}
+                    component={Link}
+                    to={'/'}
+                >
+                    <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+                    <ListItemText>Sign Out</ListItemText>
+                </ListItem>
+                :
+                null}
             </List>
         </Drawer>
     );

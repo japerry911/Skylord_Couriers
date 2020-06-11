@@ -7,11 +7,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { NON_AUTH_ROUTES_ARRAY, AUTH_COURIER_ROUTES_ARRAY, AUTH_SHIPPER_ROUTES_ARRAY } from '../../router/routesArrays';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { userSignOut } from '../../redux/actions/userActions';
 
 const Footer = () => {
     const classes = useStyles();
 
+    const dispatch = useDispatch();
     const authed = useSelector(state => state.user.authed);
     const user = useSelector(state => state.user.user);
 
@@ -76,6 +79,20 @@ const Footer = () => {
                             </ListItem>
                         );
                     })}
+                    {authed
+                    ?
+                    <ListItem
+                        button
+                        onClick={() => dispatch(userSignOut())}
+                        component={Link}
+                        to={'/'}
+                        className={classes.listItemStyle}
+                    >
+                        <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+                        <ListItemText>Sign Out</ListItemText>
+                    </ListItem>
+                    :
+                    null}
                 </List>
             </Grid>
         </Grid>

@@ -54,3 +54,9 @@ export const userSignIn = formData => {
         }
     };
 };
+
+export const userSignOut = () => {
+    return {
+        type: 'USER_SIGN_OUT'
+    };
+};
