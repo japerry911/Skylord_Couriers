@@ -11,11 +11,11 @@ export const useStyles = makeStyles(theme => ({
         backgroundSize: 'cover'
     },
     headerTextStyle: {
-        color: theme.colors.accentLightWhite,
+        color: '#000',
         fontWeight: 'bold'
     },
     subGridContainerStyle: {
-        backgroundColor: theme.colors.primaryOrange,
+        backgroundColor: theme.colors.accentLightOrange,
         borderRadius: '12pt',
         padding: '2rem'
     },

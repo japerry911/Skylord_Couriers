@@ -9,5 +9,24 @@ export const useStyles = makeStyles(theme => ({
         backgroundAttachment: 'fixed',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
+    },
+    subGridContainerStyle: {
+        backgroundColor: theme.colors.accentLightOrange,
+        borderRadius: '12pt',
+        padding: '2rem',
+        minHeight: '600px'
+    },
+    headerTextStyle: {
+        color: '#000',
+        fontWeight: 'bold'
+    },
+    gridItemStyle: {
+        padding: '2rem 0'
+    },
+    formContainerStyle: {
+        width: '100%'
+    },
+    formFieldStyle: {
+        width: '100%'
     }
 }));
