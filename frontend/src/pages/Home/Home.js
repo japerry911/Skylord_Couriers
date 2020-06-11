@@ -2,9 +2,13 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './HomeStyles';
+import { useSelector } from 'react-redux';
 
 const Home = ({ history }) => {
     const classes = useStyles();
+
+    const authed = useSelector(state => state.user.authed);
+    const user = useSelector(state => state.user.user);
 
     return (
         <Grid container className={classes.mainGridStyle} direction='column' alignItems='center' justify='space-evenly'>
@@ -25,12 +29,30 @@ const Home = ({ history }) => {
                     </Button>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} lg={6} xl={6} align='center'>
+                    {authed && user.isShipper
+                    ?
+                    <Button
+                        className={classes.buttonStyle}
+                        onClick={() => history.push('/shipper/dashboard')}
+                    >
+                        Go to Dashboard
+                    </Button>
+                    :
+                    authed && user.isCourier 
+                    ?
+                    <Button
+                        className={classes.buttonStyle}
+                        onClick={() => history.push('/courier/dashboard')}
+                    >
+                        Go to Dashboard
+                    </Button>
+                    :
                     <Button
                         className={classes.buttonStyle}
                         onClick={() => history.push('/sign-in-sign-up')}
                     >
                         Sign In
-                    </Button>
+                    </Button>}
                 </Grid>
             </Grid>
         </Grid>
