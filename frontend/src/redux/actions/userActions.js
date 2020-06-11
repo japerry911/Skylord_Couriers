@@ -25,15 +25,8 @@ export const userSignUp = formData => {
         dispatch(userPending());
 
         try {
-            const response = await expressServer.post('/api/users', { ...formData });
-            
-            const successObject = {
-                user: response.data,
-                token: response.headers['x-auth-token'],
-                authed: true
-            };
-
-            dispatch(userSuccess(successObject));
+            await expressServer.post('/api/users', { ...formData });
+            dispatch(userSuccess({}));
         } catch (error) {
             dispatch(userError(error.response.data));
             throw Error(error.response.data);

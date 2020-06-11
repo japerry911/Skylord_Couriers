@@ -48,6 +48,7 @@ const SignInSignUp = ({ history }) => {
 
     const onSignUpDialogClose = () => {
         setSignUpDialogOpen(false);
+
         setUsername('');
         setPassword('');
         setConfirmPassword('');

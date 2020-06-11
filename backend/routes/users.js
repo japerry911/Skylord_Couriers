@@ -23,16 +23,14 @@ router.post('/', async (req, res) => {
         return res.status(400).send('Username already registered.');
     }
 
-    const user = new User(_.pick(req.body, ['username', 'isShipper', 'isCourier', 'city', 'state']));
+    const user = new User(_.pick(req.body, ['username', 'password', 'isShipper', 'isCourier', 'city', 'state']));
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
 
     try {
-        const result = await user.save();
-        const token = user.generateAuthToken();
-
-        res.header('x-auth-token', token).send(_.pick(result, '_id', 'username', 'isShipper', 'isCourier', 'city', 'state'));
+        await user.save();
+        res.send('Successfully Created...');
     } catch (error) {
         res.status(400).send(`Server Error: ${error}`);
     }
