@@ -32,7 +32,7 @@ const About = ({ history }) => {
                 </Grid>
                 <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
                     <Button
-                        onClick={() => history.push('/sign-up')}
+                        onClick={() => history.push('/sign-in-sign-up')}
                         className={classes.buttonStyle}
                     >
                         Sign Up For Skylord Couriers
