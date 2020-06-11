@@ -5,6 +5,8 @@ import About from '../pages/About/About';
 import Contact from '../pages/Contact/Contact';
 import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 import Dashboard from '../pages/Dashboard/Dashboard';
+import Postings from '../pages/Postings/Postings';
+import Profile from '../pages/Profile/Profile';
 import ScrollToTop from '../misc/ScrollToTop';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -42,6 +44,18 @@ export default () => {
                     exact
                     path='/:type/dashboard'
                     component={Dashboard}
+                />
+
+                <ProtectedRoute
+                    exact
+                    path='/:type/postings'
+                    component={Postings}
+                />
+
+                <ProtectedRoute
+                    exact
+                    path='/:type/profile'
+                    component={Profile}
                 />
             </Switch>
         </Fragment>
