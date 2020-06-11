@@ -29,7 +29,8 @@ export const userSignUp = formData => {
             
             const successObject = {
                 user: response.data,
-                token: response.headers['x-auth-token']
+                token: response.headers['x-auth-token'],
+                authed: true
             };
 
             dispatch(userSuccess(successObject));
@@ -48,7 +49,9 @@ export const userSignIn = formData => {
             const response = await expressServer.post('/api/auth', { ...formData });
 
             const successObject = {
-                token: response.data
+                user: response.data,
+                token: response.headers['x-auth-token'],
+                authed: true
             };
 
             dispatch(userSuccess(successObject));
