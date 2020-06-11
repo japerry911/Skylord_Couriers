@@ -24,7 +24,7 @@ function validateGood(good) {
         weight: Joi.number().min(0.01).max(1000).required()
     };
 
-    return validateGood(good, schema);
+    return Joi.validate(good, schema);
 }
 
 module.exports.Good = Good;
