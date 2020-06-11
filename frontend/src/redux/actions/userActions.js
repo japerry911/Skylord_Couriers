@@ -29,7 +29,8 @@ export const userSignUp = formData => {
             
             const successObject = {
                 user: response.data,
-                token: response.headers['x-auth-token']
+                token: response.headers['x-auth-token'],
+                authed: true
             };
 
             dispatch(userSuccess(successObject));
@@ -49,7 +50,8 @@ export const userSignIn = formData => {
 
             const successObject = {
                 user: response.data,
-                token: response.headers['x-auth-token']
+                token: response.headers['x-auth-token'],
+                authed: true
             };
 
             dispatch(userSuccess(successObject));

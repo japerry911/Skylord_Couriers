@@ -1,4 +1,4 @@
-const INITIAL_STATE = { user: {}, token: null, isLoading: false, error: null, type: null };
+const INITIAL_STATE = { user: {}, token: null, isLoading: false, error: null, type: null, authed: false };
 
 const userReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
