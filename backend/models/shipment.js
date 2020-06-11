@@ -1,15 +1,26 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const { userSchema } = require('./user');
 
 const shipmentSchema = new mongoose.Schema({
     courier: {
-        type: userSchema,
-        required: true
+        type: new mongoose.Schema({
+            username: {
+                type: String,
+                minlength: 6,
+                maxlength: 30,
+                required: true,
+            }
+        })
     },
     shipper: {
-        type: userSchema,
-        required: true
+        type: new mongoose.Schema({
+            username: {
+                type: String,
+                minlength: 6,
+                maxlength: 30,
+                required: true,
+            }
+        })
     },
     price: {
         type: Number,
@@ -41,9 +52,9 @@ const shipmentSchema = new mongoose.Schema({
 const Shipment = mongoose.model('Shipment', shipmentSchema);
 
 function validateShipment(shipment) {
-    const schema = {
-        courierId: Joi.objectId().required(),
-        shipperId: Joi.objectId().required(),
+    const schema = Joi.object().keys({
+        courierId: Joi.objectId(),
+        shipperId: Joi.objectId(),
         price: Joi.number().min(1.00).max(10000).required(),
         startDate: Joi.date(),
         endDate: Joi.date(),
@@ -51,8 +62,8 @@ function validateShipment(shipment) {
         startDate: Joi.date(),
         deliveredDate: Joi.date(),
         status: Joi.string().valid(['Not Claimed', 'Pending Delivery', 'Successful Delivery', 'Failed Delivery']).required(),
-        comments: Joi.string().required()
-    };
+        comments: Joi.string()
+    }).or('courierId', 'shipperId');
 
     return Joi.validate(shipment, schema);
 }
