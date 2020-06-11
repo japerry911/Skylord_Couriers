@@ -20,6 +20,10 @@ const Contact = () => {
         setValidateStatus(subject && message && emailRegexp.test(email));
     }, [email, subject, message]);
 
+    const onFormSubmit = event => {
+        event.preventDefault();
+    };
+
     return (
         <Grid container className={classes.mainGridStyle} direction='column' alignItems='center' justify='space-evenly'>
             <Grid container item xs={8} sm={8} md={8} lg={8} xl={8} alignItems='center' direction='column' className={classes.subGridContainerStyle}>
@@ -32,7 +36,7 @@ const Contact = () => {
                     </Typography>
                 </Grid>
                 <Grid container item xs={10} sm={10} md={12} lg={10} xl={10} align='center' className={classes.gridItemStyle} direction='column' alignItems='center'>
-                    <form className={classes.formContainerStyle}>
+                    <form className={classes.formContainerStyle} onSubmit={onFormSubmit}>
                         <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
                             <TextField
                                 value={email}
