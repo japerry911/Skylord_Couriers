@@ -3,9 +3,13 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './AboutStyles';
+import { useSelector } from 'react-redux';
 
 const About = ({ history }) => {
     const classes = useStyles();
+
+    const authed = useSelector(state => state.user.authed);
+    const user = useSelector(state => state.user.user);
 
     return (
         <Grid container className={classes.mainGridStyle} direction='column' alignItems='center' justify='space-evenly'>
@@ -31,12 +35,30 @@ const About = ({ history }) => {
                     </Typography>
                 </Grid>
                 <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                    {authed && user.isShipper
+                    ?
                     <Button
-                        onClick={() => history.push('/sign-in-sign-up')}
                         className={classes.buttonStyle}
+                        onClick={() => history.push('/shipper/dashboard')}
                     >
-                        Sign Up For Skylord Couriers
+                        Go to Dashboard
                     </Button>
+                    :
+                    authed && user.isCourier 
+                    ?
+                    <Button
+                        className={classes.buttonStyle}
+                        onClick={() => history.push('/courier/dashboard')}
+                    >
+                        Go to Dashboard
+                    </Button>
+                    :
+                    <Button
+                        className={classes.buttonStyle}
+                        onClick={() => history.push('/sign-in-sign-up')}
+                    >
+                        Sign Up for Skylord Couriers
+                    </Button>}
                 </Grid>
             </Grid>
         </Grid>
