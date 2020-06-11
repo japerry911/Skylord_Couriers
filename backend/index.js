@@ -1,4 +1,5 @@
 const cors = require('cors');
+const shipments = require('./routes/shipments');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 const contact = require('./routes/contact');
@@ -17,6 +18,7 @@ app.use(cors({ exposedHeaders: ['x-auth-token'] }));
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/contact', contact);
+app.use('/api/shipments', shipments);
 
 mongoose.connect('mongodb://localhost/skylordCouriers', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true })
     .then(() => console.log('Successfully connected to MongoDB...'))
