@@ -1,13 +1,12 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import { useStyles } from './ContactStyles';
 
 const Contact = () => {
     const classes = useStyles();
 
     return (
-        <div>
-            <h1>Contact</h1>
-        </div>
+        <Grid container className={classes.mainGridStyle} direction='column' alignItems='center' justify='space-evenly'></Grid>
     );
 };
 

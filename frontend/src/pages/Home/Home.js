@@ -15,7 +15,7 @@ const Home = ({ history }) => {
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center'>
                 <img
                     alt='Skylord Couriers Logo'
-                    src='https://skylord-couriers-12395823838.s3.us-east-2.amazonaws.com/Logos/dark_logo_transparent_background.png'
+                    src='https://skylord-couriers-12395823838.s3.us-east-2.amazonaws.com/Logos/white_logo_transparent_background.png'
                     className={classes.logoStyle}
                 />
             </Grid>
