@@ -24,7 +24,7 @@ router.post('/send-email', (req, res) => {
     const mailOptions = {
         to: process.env.GMAIL_USER_NAME,
         subject: req.body.subject,
-        text: req.body.message
+        text: `Email: ${req.body.email}, Message: ${req.body.message}`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
