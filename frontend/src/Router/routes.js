@@ -6,6 +6,7 @@ import Contact from '../pages/Contact/Contact';
 import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import ScrollToTop from '../misc/ScrollToTop';
+import ProtectedRoute from './ProtectedRoute';
 
 export default () => {
     return (
@@ -37,7 +38,7 @@ export default () => {
                     component={SignInSignUp}
                 />
 
-                <Route
+                <ProtectedRoute
                     exact
                     path='/:type/dashboard'
                     component={Dashboard}

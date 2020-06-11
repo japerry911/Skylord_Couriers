@@ -14,7 +14,6 @@ router.post('/', async (req, res) => {
     const { error } = validateUser(req.body);
 
     if (error) {
-        console.log('here', error);
         const errors = error.details.map(errorObject => errorObject.message);
         return res.status(400).send(`Error(s): ${errors.join(', ')}`);
     }
@@ -24,7 +23,7 @@ router.post('/', async (req, res) => {
         return res.status(400).send('Username already registered.');
     }
 
-    const user = new User(_.pick(req.body, ['username', 'password', 'isShipper', 'isCourier', 'city', 'state']));
+    const user = new User(_.pick(req.body, ['username', 'isShipper', 'isCourier', 'city', 'state']));
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);

@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const { User } = require('../models/user');
@@ -23,7 +24,7 @@ router.post('/', async (req, res) => {
     }
 
     const token = user.generateAuthToken();
-    res.header('x-auth-token', token).send(user);
+    res.header('x-auth-token', token).send(_.pick(user, '_id', 'username', 'isShipper', 'isCourier', 'city', 'state'));
 });
 
 function validate(req) {

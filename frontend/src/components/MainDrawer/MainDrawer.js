@@ -7,9 +7,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { NON_AUTH_ROUTES_ARRAY } from '../../router/routesArrays';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MainDrawer = ({ open, onClose, setTitle }) => {
     const classes = useStyles();
+    
+    const auth = useSelector(state => state.user.auth);
+    const user = useSelector(state => state.user.user);
+    console.log(user);
 
     return (
         <Drawer 
