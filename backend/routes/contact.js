@@ -24,18 +24,16 @@ router.post('/send-email', (req, res) => {
     const mailOptions = {
         to: process.env.GMAIL_USER_NAME,
         subject: req.body.subject,
-        body: req.body.message
+        text: req.body.message
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error(error);
+            return res.status(500).send('Server Error, Try Again Later.');
+        } else {
+            return res.status(200).send('Message sent...');
         }
-
-        console.log(`Message ${info.messageId} sent: ${info.response}`)
     });
-
-    res.status(200);
 });
 
 function validateEmail(email) {
