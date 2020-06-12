@@ -80,7 +80,7 @@ router.get('/:id', [auth], async (req, res) => {
             return res.status(400).send('Shipment Not Found.');
         }
 
-        res.status(200).send(shipment);
+        res.status(200).send(shipment); 
     } catch (error) {
         res.status(400).send(`Server Error: ${error}`);
     }
