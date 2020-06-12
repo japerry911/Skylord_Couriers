@@ -72,6 +72,20 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
+router.get('/', [auth], async (req, res) => {
+    try {
+        const shipments = await Shipment.find();
+
+        if (!shipments) {
+            res.status(400).send('No Shipments Found.');
+        }
+
+        res.status(200).send(shipments);
+    } catch (error) {
+        res.status(400).send(`Server Error: ${error}`);
+    }
+});
+
 router.get('/:id', [auth], async (req, res) => {
     try {
         const shipment = await Shipment.findById(req.params.id);
