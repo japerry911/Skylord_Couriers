@@ -212,6 +212,8 @@ async function main() {
     console.log('------------------------------');
     console.log('FINISHED SEEDING, HAVE FUN!');
     console.log('------------------------------');
+    
+    process.exit(0);
 }
 
 main();
