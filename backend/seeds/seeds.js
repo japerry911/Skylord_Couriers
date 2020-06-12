@@ -1,3 +1,4 @@
+const { Shipment } = require('../models/shipment');
 const { Good } = require('../models/good');
 const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
@@ -12,6 +13,7 @@ async function fireUpMongoose() {
 
         await User.deleteMany({});
         await Good.deleteMany({});
+        await Shipment.deleteMany({});
 
         console.log('Seeds cleared...');
     } catch (error) {
@@ -91,6 +93,59 @@ async function seedGoods() {
     });
 }
 
+async function seedShipments() {
+    await mongoose.connect('mongodb://localhost/skylordCouriers', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true });
+
+    const test1C = await User.findOne({ username: 'testtest1' });
+    const test2S = await User.findOne({ username: 'testtest2' });
+    const test3S = await User.findOne({ username: 'testtest3' });
+    const test4C = await User.findOne({ username: 'testtest4' });
+
+    const shipments = [
+        {
+            shipper: test2S,
+            courier: test1C,
+            price: 12.34,
+            status: 'Not Claimed'
+        },
+        {
+            shipper: test2S,
+            courier: test1C,
+            price: 12.12,
+            status: 'Not Claimed'
+        },
+        {
+            shipper: test2S,
+            courier: test1C,
+            price: 25.31,
+            status: 'Not Claimed'
+        },
+        {
+            shipper: test3S,
+            courier: test4C,
+            price: 7.42,
+            status: 'Not Claimed'
+        },
+        {
+            shipper: test3S,
+            courier: test4C,
+            price: 12.95,
+            status: 'Not Claimed'
+        },
+        {
+            shipper: test3S,
+            courier: test4C,
+            price: 100.25,
+            status: 'Not Claimed'
+        }
+    ];
+
+    shipments.forEach(async shipment => {
+        const newShipment = new Shipment(shipment);
+        newShipment.save();
+    });
+}
+
 async function main() {
     await fireUpMongoose();
 
@@ -99,6 +154,9 @@ async function main() {
 
     await seedGoods();
     console.log('Goods seeded...');
+
+    await seedShipments();
+    console.log('Shipments seeded...');
 }
 
 main();
