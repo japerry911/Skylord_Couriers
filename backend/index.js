@@ -1,3 +1,5 @@
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 const cors = require('cors');
 const goods = require('./routes/goods');
 const shipments = require('./routes/shipments');
@@ -8,7 +10,6 @@ const shipmentGoods = require('./routes/shipmentGoods');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
-require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
 

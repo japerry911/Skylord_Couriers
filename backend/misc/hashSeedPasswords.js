@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 async function hashPasswords() {
     const salt = await bcrypt.genSalt(10);
 
+    console.log(salt);
+
     const newJsonArray = await Promise.all(jsonData.map(async userObject => {
         return await bcrypt.hash(userObject.password, salt)
                     .then(hashedPassword => {

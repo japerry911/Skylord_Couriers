@@ -1,0 +1,9 @@
+[
+    {
+        "courier": {
+            "username": "test"
+        },
+        "price": 12.34,
+        "status": "Not Claimed"
+    }
+]
