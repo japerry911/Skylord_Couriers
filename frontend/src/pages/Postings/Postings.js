@@ -60,7 +60,7 @@ const Dashboard = ({ match }) => {
                 spinner
                 text='Loading...'
             >
-                <Grid container className={classes.mainGridStyle} direction='column' alignItems='center' justify='space-evenly'>
+                <Grid container className={classes.mainGridStyle} direction='column' alignItems='center'>
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.gridStyle}>
                         <MaterialTable
                             columns={[
@@ -71,7 +71,7 @@ const Dashboard = ({ match }) => {
                                 { title: 'Price', field: 'price' }
                             ]}
                             data={tableReadyPostings}
-                            title='Demo Table'
+                            title='Postings Board'
                         />
                     </Grid>
                 </Grid>
