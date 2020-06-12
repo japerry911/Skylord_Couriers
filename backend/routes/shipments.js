@@ -51,4 +51,25 @@ router.post('/', [auth, shipper], async (req, res) => {
     }
 });
 
+router.put('/:id', auth, async (req, res) => {
+    const { error } = validateShipment(req.body);
+
+    if (error) {
+        const errors = error.details.map(errorObject => errorObject.message);
+        return res.status(400).send(`Error(s): ${errors.join(', ')}`);
+    }
+
+    try {
+        const result = await Shipment.findByIdAndUpdate(req.params.id, { ...req.body });
+        
+        if (!result) {
+            return res.status(400).send('Shipment Not Found.');
+        }
+
+        res.status(200).send('Updated Successfully.');
+    } catch (error) {
+        res.status(400).send(`Server Error: ${error}`);
+    }
+});
+
 module.exports = router;
