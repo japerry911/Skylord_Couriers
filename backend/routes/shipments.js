@@ -72,4 +72,18 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
+router.put('/:id', [auth, shipper], async (req, res) => {
+    try {
+        const result = await Shipment.findByIdAndDelete(req.params.id);
+
+        if (!result) {
+            return res.status(400).send('Shipment Not Found.');
+        }
+
+        res.status(200).send('Deleted Successfully.');
+    } catch (error) {
+        res.status(400).send(`Server Error: ${error}`);
+    }
+});
+
 module.exports = router;
