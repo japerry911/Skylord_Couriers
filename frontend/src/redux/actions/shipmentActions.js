@@ -19,3 +19,23 @@ export const shipmentSuccess = payload => {
         payload
     };
 };
+
+
+export const getPostings = token => {
+    return async dispatch => {
+        dispatch(shipmentPending());
+
+        try {
+            const response = await expressServer.get('/api/shipments', { headers: { 'x-auth-token': token }});
+            
+            const successObject = {
+                postings: response.data
+            };
+
+            dispatch(shipmentSuccess(successObject));
+        } catch (error) {
+            dispatch(shipmentError(error.response.header));
+            throw Error(error.response.data);
+        }
+    };
+};

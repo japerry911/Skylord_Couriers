@@ -1,17 +1,19 @@
-const INITIAL_STATE = { postings: [], error: null, loading: false };
+const INITIAL_STATE = { postings: [], error: null, isLoading: false };
 
 export const shipmentReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
         case 'SHIPMENT_PENDING':
-            return { ...state, loading: true };
+            return { ...state, isLoading: true };
 
         case 'SHIPMENT_ERROR':
-            return { ...state, loading: false, error: action.error };
+            return { ...state, isLoading: false, error: action.error };
 
         case 'SHIPMENT_SUCCESS':
-            return { ...state, loading: false, ...action.payload };
+            return { ...state, isLoading: false, ...action.payload };
 
         default:
             return state;
     }
 };
+
+export default shipmentReducer;
