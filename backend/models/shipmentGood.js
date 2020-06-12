@@ -19,7 +19,7 @@ const shipmentGoodSchema = new mongoose.Schema({
         }),
         required: true
     },
-    shipmentId: {
+    shipment: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     }

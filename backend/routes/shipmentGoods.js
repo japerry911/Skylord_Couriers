@@ -24,7 +24,10 @@ router.post('/', [auth, shipper], async (req, res) => {
         return res.status(400).send('Shipment Not Found.');
     }
 
-    const shipmentGood = new ShipmentGood({});
+    const shipmentGood = new ShipmentGood({
+        good: { _id: good._id, name: good.name, weight: good.weight },
+        shipmentId: shipment._id
+    });
 
     try {
         const result = await shipmentGood.save();
