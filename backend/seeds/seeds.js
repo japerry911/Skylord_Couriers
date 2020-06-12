@@ -7,6 +7,13 @@ async function fireUpMongoose() {
     try {
         await mongoose.connect('mongodb://localhost/skylordCouriers', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true });
         console.log('Successfully connected to MongoDB...');
+
+        console.log('Clearing Seeds...');
+
+        await User.deleteMany({});
+        await Good.deleteMany({});
+
+        console.log('Seeds cleared...');
     } catch (error) {
         console.error(`Failed to connect to MongoDB - ${error}`);
     }
