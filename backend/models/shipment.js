@@ -54,7 +54,7 @@ const Shipment = mongoose.model('Shipment', shipmentSchema);
 function validateShipment(shipment) {
     const schema = Joi.object().keys({
         courierId: Joi.objectId(),
-        shipperId: Joi.objectId(),
+        shipperId: Joi.objectId().disallow(Joi.ref('courierId')),
         price: Joi.number().min(1.00).max(10000).required(),
         startDate: Joi.date(),
         endDate: Joi.date(),
