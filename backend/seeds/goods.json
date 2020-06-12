@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Dog Food",
+        "weight": 12.34
+    },
+    {
+        "name": "Cat Food",
+        "weight": 25.00
+    },
+    {
+        "name": "Mousepad",
+        "weight": 0.55
+    },
+    {
+        "name": "Salmon Dog Bones",
+        "weight": 40.25
+    }
+]
