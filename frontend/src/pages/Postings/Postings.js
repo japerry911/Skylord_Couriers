@@ -6,7 +6,7 @@ import MaterialTable from 'material-table';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './PostingsStyles';
 
-const Dashboard = ({ match }) => {
+const Dashboard = ({ match, history }) => {
     const classes = useStyles();
 
     const [tableReadyPostings, setTableReadyPostings] = useState([]);
@@ -47,6 +47,7 @@ const Dashboard = ({ match }) => {
 
                 returnObject.status = postingObject.status;
                 returnObject.price = postingObject.price;
+                returnObject.id = postingObject._id;
 
                 return returnObject;
             }));
@@ -72,6 +73,11 @@ const Dashboard = ({ match }) => {
                             ]}
                             data={tableReadyPostings}
                             title='Postings Board'
+                            onRowClick={(event, rowData) => {
+                                event.preventDefault();
+
+                                history.push(`/${match.params.type}/shipments/${rowData.id}`)
+                            }}
                         />
                     </Grid>
                 </Grid>
