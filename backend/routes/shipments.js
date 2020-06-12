@@ -72,7 +72,21 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
-router.put('/:id', [auth, shipper], async (req, res) => {
+router.get('/:id', [auth], async (req, res) => {
+    try {
+        const shipment = await Shipment.findById(req.params.id);
+
+        if (!shipment) {
+            return res.status(400).send('Shipment Not Found.');
+        }
+
+        res.status(200).send(shipment);
+    } catch (error) {
+        res.status(400).send(`Server Error: ${error}`);
+    }
+});
+
+router.delete('/:id', [auth, shipper], async (req, res) => {
     try {
         const result = await Shipment.findByIdAndDelete(req.params.id);
 
