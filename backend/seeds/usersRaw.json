@@ -1,0 +1,50 @@
+[
+    {
+        "username": "test1",
+        "password": "test2",
+        "isShipper": true,
+        "isCourier": false,
+        "city": "Denver",
+        "state": "CO"
+    },
+    {
+        "username": "test2",
+        "password": "test2",
+        "isShipper": false,
+        "isCourier": true,
+        "city": "Nashville",
+        "state": "TN"
+    },
+    {
+        "username": "test3",
+        "password": "test3",
+        "isShipper": false,
+        "isCourier": true,
+        "city": "Nashville",
+        "state": "TN"
+    },
+    {
+        "username": "test4",
+        "password": "test4",
+        "isShipper": false,
+        "isCourier": true,
+        "city": "Nashville",
+        "state": "TN"
+    },
+    {
+        "username": "test5",
+        "password": "test5",
+        "isShipper": true,
+        "isCourier": false,
+        "city": "Nashville",
+        "state": "TN"
+    },
+    {
+        "username": "test6",
+        "password": "test6",
+        "isShipper": true,
+        "isCourier": false,
+        "city": "Nashville",
+        "state": "TN"
+    }
+]

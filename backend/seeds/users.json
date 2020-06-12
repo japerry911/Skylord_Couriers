@@ -1,0 +1,18 @@
+[
+    {
+        "username": "test",
+        "password": "$2b$10$pRounmvAAB7BkqV8nAWicO8aHEugVF4ABwCb4gZBXoBveBuSFsWn6",
+        "isShipper": true,
+        "isCourier": false,
+        "city": "Denver",
+        "state": "CO"
+    },
+    {
+        "username": "test1",
+        "password": "$2b$10$pRounmvAAB7BkqV8nAWicOdzkn0r3i9Yqny6wFdrfEP.jFX6MUuI2",
+        "isShipper": true,
+        "isCourier": false,
+        "city": "Nashville",
+        "state": "TN"
+    }
+]
