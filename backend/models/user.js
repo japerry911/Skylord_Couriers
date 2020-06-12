@@ -43,7 +43,6 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateAuthToken = function() {
-    console.log('HERE -', process.env.JWT_PRIVATE_KEY);
     return jwt.sign({ _id: this._id, isShipper: this.isShipper, isCourier: this.isCourier }, process.env.JWT_PRIVATE_KEY);
 }
 
