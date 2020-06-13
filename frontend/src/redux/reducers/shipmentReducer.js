@@ -1,4 +1,4 @@
-const INITIAL_STATE = { postings: [], error: null, isLoading: false };
+const INITIAL_STATE = { postings: [], showShipment: {}, error: null, isLoading: false };
 
 export const shipmentReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {

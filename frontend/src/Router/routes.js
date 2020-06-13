@@ -7,6 +7,7 @@ import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Postings from '../pages/Postings/Postings';
 import Profile from '../pages/Profile/Profile';
+import ShowShipment from '../pages/ShowShipment/ShowShipment';
 import ScrollToTop from '../misc/ScrollToTop';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -56,6 +57,12 @@ export default () => {
                     exact
                     path='/:type/profile'
                     component={Profile}
+                />
+
+                <ProtectedRoute
+                    exact
+                    path='/:type/shipments/:id'
+                    component={ShowShipment}
                 />
             </Switch>
         </Fragment>
