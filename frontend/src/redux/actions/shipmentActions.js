@@ -34,7 +34,26 @@ export const getPostings = token => {
 
             dispatch(shipmentSuccess(successObject));
         } catch (error) {
-            dispatch(shipmentError(error.response.header));
+            dispatch(shipmentError(error.response.data));
+            throw Error(error.response.data);
+        }
+    };
+};
+
+export const getShipment = (token, id) => {
+    return async dispatch => {
+        dispatch(shipmentPending());
+
+        try {
+            const response = await expressServer.get(`/api/shipments/${id}`, { headers: { 'x-auth-token': token }});
+
+            const successObject = {
+                showShipment: response.data
+            };
+
+            dispatch(shipmentSuccess(successObject));
+        } catch (error) {
+            dispatch(shipmentError(error.response.data));
             throw Error(error.response.data);
         }
     };
