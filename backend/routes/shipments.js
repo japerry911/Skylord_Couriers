@@ -1,5 +1,5 @@
 const { User } = require('../models/user');
-const { ShipmentGood } = require('../models/shipmentGood');
+const { Good } = require('../models/good');
 const { validateShipment, Shipment } = require('../models/shipment');
 const shipper = require('../middleware/shipper');
 const auth = require('../middleware/auth');
@@ -32,9 +32,23 @@ router.post('/', [auth, shipper], async (req, res) => {
         }
     }
 
+    let goods = [];
+    if (req.body.goodIds) {
+        for (let i = 0; i < req.body.goodIds.length; i++) {
+            const good = await Good.findById(req.body.goodIds[i]);
+
+            if (!good) {
+                return res.status(400).send(`Good ${req.body.goodIds[i]} Not Found.`);
+            }
+
+            goods.push(good);
+        }
+    }
+
     const shipment = new Shipment({
         price: req.body.price,
         status: req.body.status,
+        goods
     });
 
     if (shipUser) shipment.shipper = { _id: shipUser._id, username: shipUser.username };

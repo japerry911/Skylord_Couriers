@@ -51,7 +51,8 @@ const shipmentSchema = new mongoose.Schema({
     goods: [
         {
             type: goodSchema,
-            ref: 'Good'
+            ref: 'Good',
+            required: true
         }
     ]
 });
@@ -70,6 +71,7 @@ function validateShipment(shipment) {
         deliveredDate: Joi.date(),
         status: Joi.string().valid(['Not Claimed', 'Pending Delivery', 'Successful Delivery', 'Failed Delivery']).required(),
         comments: Joi.string(),
+        goodIds: Joi.array().items(Joi.string()).required()
     }).or('courierId', 'shipperId');
 
     return Joi.validate(shipment, schema);
