@@ -6,7 +6,6 @@ const shipments = require('./routes/shipments');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 const contact = require('./routes/contact');
-const shipmentGoods = require('./routes/shipmentGoods');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
@@ -23,7 +22,6 @@ app.use('/api/auth', auth);
 app.use('/api/contact', contact);
 app.use('/api/shipments', shipments);
 app.use('/api/goods', goods);
-app.use('/api/shipment-goods', shipmentGoods);
 
 mongoose.connect('mongodb://localhost/skylordCouriers', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true })
     .then(() => console.log('Successfully connected to MongoDB...'))

@@ -1,4 +1,5 @@
 const { User } = require('../models/user');
+const { ShipmentGood } = require('../models/shipmentGood');
 const { validateShipment, Shipment } = require('../models/shipment');
 const shipper = require('../middleware/shipper');
 const auth = require('../middleware/auth');
@@ -88,11 +89,13 @@ router.get('/', [auth], async (req, res) => {
 
 router.get('/:id', [auth], async (req, res) => {
     try {
-        const shipment = await Shipment.findById(req.params.id);
+        let shipment = await Shipment.findById(req.params.id);
 
         if (!shipment) {
             return res.status(400).send('Shipment Not Found.');
         }
+
+        shipment.shipmentGoods = ShipmentGood.find({ })
 
         res.status(200).send(shipment); 
     } catch (error) {

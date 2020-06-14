@@ -1,4 +1,4 @@
-const { Shipment } = require('../models/shipment');
+const { Shipment, validateShipment } = require('../models/shipment');
 const { Good } = require('../models/good');
 const { User } = require('../models/user');
 const { ShipmentGood } = require('../models/shipmentGood');
@@ -12,10 +12,10 @@ async function fireUpMongoose() {
 
         console.log('Clearing Seeds...');
 
+        await ShipmentGood.deleteMany({});
+        await Shipment.deleteMany({});
         await User.deleteMany({});
         await Good.deleteMany({});
-        await Shipment.deleteMany({});
-        await ShipmentGood.deleteMany({});
 
         console.log('Seeds cleared...');
     } catch (error) {
@@ -103,52 +103,65 @@ async function seedShipments() {
     const test3S = await User.findOne({ username: 'testtest3' });
     const test4C = await User.findOne({ username: 'testtest4' });
 
+    const good1 = await Good.findOne({ name: 'Dog Bones' });
+    const good2 = await Good.findOne({ name: 'Cat Bones' });
+    const good3 = await Good.findOne({ name: 'Salmon Dog Treats' });
+    const good4 = await Good.findOne({ name: 'Giant Blocks of Concrete' });
+
     const shipments = [
         {
             shipper: test2S,
             courier: test1C,
             price: 12.34,
-            status: 'Not Claimed'
+            status: 'Not Claimed',
+            goods: [good1]
         },
         {
             shipper: test2S,
             courier: test1C,
             price: 12.12,
-            status: 'Not Claimed'
+            status: 'Not Claimed',
+            goods: [good2]
         },
         {
             shipper: test2S,
             courier: test1C,
             price: 25.31,
-            status: 'Not Claimed'
+            status: 'Not Claimed',
+            goods: [good3]
         },
         {
             shipper: test3S,
             courier: test4C,
             price: 7.42,
-            status: 'Not Claimed'
+            status: 'Not Claimed',
+            goods: [good4]
         },
         {
             shipper: test3S,
             courier: test4C,
             price: 12.95,
-            status: 'Not Claimed'
+            status: 'Not Claimed',
+            goods: [good1, good2]
         },
         {
             shipper: test3S,
             courier: test4C,
             price: 100.25,
-            status: 'Not Claimed'
+            status: 'Not Claimed',
+            goods: [good3, good4]
         }
     ];
 
     shipments.forEach(async shipment => {
         const newShipment = new Shipment(shipment);
-        newShipment.save();
+        await newShipment.save();
     });
 }
 
 async function seedShipmentGoods() {
+    await mongoose.connect('mongodb://localhost/skylordCouriers', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true });
+
     const good1 = await Good.findOne({ name: 'Dog Bones' });
     const good2 = await Good.findOne({ name: 'Cat Bones' });
     const good3 = await Good.findOne({ name: 'Salmon Dog Treats' });
@@ -164,33 +177,41 @@ async function seedShipmentGoods() {
     const shipmentGoods = [
         {
             good: good1,
-            shipmentId: shipment1._id 
+            shipment: mongoose.Types.ObjectId(shipment1._id)
         },
-        {
-            good: good2,
-            shipmentId: shipment2._id
-        },
-        {
-            good: good3,
-            shipmentId: shipment3._id
-        },
-        {
-            good: good4,
-            shipmentId: shipment4._id
-        },
-        {
-            good: good3,
-            shipmentId: shipment5._id
-        },
-        {
-            good: good2,
-            shipmentId: shipment6._id
-        }
+        // {
+        //     good: good2,
+        //     shipmentId: shipment2._id
+        // },
+        // {
+        //     good: good3,
+        //     shipmentId: shipment3._id
+        // },
+        // {
+        //     good: good4,
+        //     shipmentId: shipment4._id
+        // },
+        // {
+        //     good: good3,
+        //     shipmentId: shipment5._id
+        // },
+        // {
+        //     good: good2,
+        //     shipmentId: shipment6._id
+        // }
     ];
+
+    console.log(shipmentGoods);
 
     shipmentGoods.forEach(async shipmentGood => {
         const newShipmentGood = new ShipmentGood(shipmentGood);
-        await newShipmentGood.save();
+        console.log('here');
+        try {
+        const two = await newShipmentGood.save();
+        console.log('here2', two);
+        } catch (e) {
+            console.log('here3', e);
+        }
     });
 }
 
@@ -206,14 +227,14 @@ async function main() {
     await seedShipments();
     console.log('Shipments seeded...');
 
-    await seedShipmentGoods();
+    /*await seedShipmentGoods();
     console.log('ShipmentGoods seeded...');
 
     console.log('------------------------------');
     console.log('FINISHED SEEDING, HAVE FUN!');
     console.log('------------------------------');
     
-    process.exit(0);
+    process.exit(0);*/
 }
 
 main();
