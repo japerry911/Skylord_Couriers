@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { goodSchema } = require('./good');
 
 const shipmentSchema = new mongoose.Schema({
     courier: {
@@ -46,7 +47,14 @@ const shipmentSchema = new mongoose.Schema({
     comments: {
         type: String,
         default: 'n/a'
-    }
+    },
+    goods: [
+        {
+            type: goodSchema,
+            ref: 'Good',
+            required: true
+        }
+    ]
 });
 
 const Shipment = mongoose.model('Shipment', shipmentSchema);
@@ -62,7 +70,8 @@ function validateShipment(shipment) {
         startDate: Joi.date(),
         deliveredDate: Joi.date(),
         status: Joi.string().valid(['Not Claimed', 'Pending Delivery', 'Successful Delivery', 'Failed Delivery']).required(),
-        comments: Joi.string()
+        comments: Joi.string(),
+        goodIds: Joi.array().items(Joi.string()).required()
     }).or('courierId', 'shipperId');
 
     return Joi.validate(shipment, schema);
