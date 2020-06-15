@@ -101,6 +101,14 @@ const ShowShipment = ({ match }) => {
                                     Comment(s) - <br /><strong>{showShipment.comments ? showShipment.comments : 'n/a'}</strong>
                                 </Typography>
                             </Grid>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='body1'
+                                    className={classes.textStyle}
+                                >
+                                    Price - <br /><strong>${showShipment.price ? showShipment.price : 'n/a'}</strong>
+                                </Typography>
+                            </Grid>
                         </Grid>
                         <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.tableGridStyle}>
                             <MaterialTable

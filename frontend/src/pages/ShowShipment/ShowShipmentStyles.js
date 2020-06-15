@@ -34,10 +34,10 @@ export const useStyles = makeStyles(theme => ({
     },
     tableGridStyle: {
         padding: '2rem 0',
-        width: '90%'
+        width: '100%'
     },
     contentGridContainerStyle: {
-        width: '90%',
+        width: '85%',
         backgroundColor: theme.colors.accentLightGray,
         borderRadius: '12pt',
         padding: '2rem',
