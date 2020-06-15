@@ -4,12 +4,12 @@ import { getShipment } from '../../redux/actions/shipmentActions';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import LoadingOverlay from 'react-loading-overlay';
+import { getOtherUsers } from '../../redux/actions/userActions';
 import { useStyles } from './EditShipmentStyles';
 
 const EditShipment = ({ match }) => {
     const classes = useStyles();
 
-    const [isLoadingLocal, setIsLoadingLocal] = useState(false);
     const [shipperUsers, setShipperUsers] = useState([]);
     const [courierUsers, setCourierUsers] = useState([]);
 
@@ -18,10 +18,10 @@ const EditShipment = ({ match }) => {
     const error = useSelector(state => state.user.error);
     const token = useSelector(state => state.user.token);
     const showShipment = useSelector(state => state.shipments.showShipment);
+    const userId = useSelector(state => state.user.user._id);
 
     useEffect(() => {
-        setIsLoadingLocal(true);
-
+        dispatch(getOtherUsers(token, userId));
         dispatch(getShipment(token, match.params.id));
     }, [dispatch, token, match.params.id]);
         
