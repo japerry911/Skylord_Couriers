@@ -5,6 +5,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import MaterialTable from 'material-table';
+import Button from '@material-ui/core/Button';
 import { useStyles } from './ShowShipmentStyles';
 
 const ShowShipment = ({ match }) => {
@@ -113,12 +114,22 @@ const ShowShipment = ({ match }) => {
                         <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.tableGridStyle}>
                             <MaterialTable
                                 columns={[
-                                    { title: 'Good Name', field: 'name' },
-                                    { title: 'Weight (lbs)', field: 'weight' }
+                                    { title: 'Good Name', field: 'name', headerStyle: { backgroundColor: '#ECEBEA' } },
+                                    { title: 'Weight (lbs)', field: 'weight', headerStyle: { backgroundColor: '#ECEBEA' } }
                                 ]}
                                 data={showShipment.goods}
                                 title='Shipping Goods Table'
+                                style={{ backgroundColor: '#ECEBEA' }}
                             />
+                        </Grid>
+                        <Grid container item xs={10} sm={10} md={10} lg={10} xl={10} justify='center'>
+                            <Grid item xs={5} sm={5} md={5} lg={5} xl={5} align='center' className={classes.gridItemStyle}>
+                                <Button
+                                    variant='contained'
+                                >
+                                    Edit/Update Shipment 
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
