@@ -15,8 +15,7 @@ export const useStyles = makeStyles(theme => ({
         backgroundColor: theme.colors.accentLightOrange,
         borderRadius: '12pt',
         padding: '2rem',
-        minHeight: '600px',
-        marginBottom: '3rem'
+        minHeight: '600px'
     },
     gridItemStyle: {
         padding: '2rem 0'
@@ -33,11 +32,16 @@ export const useStyles = makeStyles(theme => ({
         backgroundColor: theme.colors.accentLightGray,
         borderRadius: '12pt',
         padding: '2rem',
-        minHeight: '600px', 
-        marginBottom: '3rem'
+        minHeight: '600px'
     },
     logoStyle: {
         height: 'auto',
         width: '25%'
+    },
+    formContainerStyle: {
+        width: '100%'
+    },
+    formControlStyle: {
+        width: '80%'
     }
 }));
