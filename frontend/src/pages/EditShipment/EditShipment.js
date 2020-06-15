@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getShipment } from '../../redux/actions/shipmentActions';
+import { getShipment, updateShipment } from '../../redux/actions/shipmentActions';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import LoadingOverlay from 'react-loading-overlay';
@@ -13,9 +13,10 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Button from '@material-ui/core/Button';
+import { handleOpen } from '../../redux/actions/toastActions';
 import { useStyles } from './EditShipmentStyles';
 
-const EditShipment = ({ match }) => {
+const EditShipment = ({ match, history }) => {
     const classes = useStyles();
 
     const [courier, setCourier] = useState('');
@@ -55,8 +56,29 @@ const EditShipment = ({ match }) => {
         setValidation(status && price);
     }, [status, price]);
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
+
+        const shipmentId = showShipment._id;
+        const updateShipmentObject = {};
+
+        updateShipmentObject.price = price;
+        updateShipmentObject.comments = comments;
+        updateShipmentObject.goodIds = showShipment.goods.filter(goodObject => goodObject._id).map(goodObject => goodObject._id);
+        if (courier) updateShipmentObject.courierId = courier;
+        if (shipper) updateShipmentObject.shipperId = shipper;
+        if (startDate) updateShipmentObject.startDate = startDate;
+        if (deliveredDate) updateShipmentObject.deliveredDate = deliveredDate;
+        if (status) updateShipmentObject.status = status;
+        
+        try {
+            await dispatch(updateShipment(token, shipmentId, updateShipmentObject));
+         
+            dispatch(handleOpen({ type: 'success', message: 'Shipment Updated!' }));
+            history.push(`/${match.params.type}/shipments/${match.params.id}`);
+        } catch (error) {
+            dispatch(handleOpen({ type: 'error', message: `Error: ${error}` }));
+        }
     };
 
     return (
@@ -98,7 +120,7 @@ const EditShipment = ({ match }) => {
                                             >
                                                 {shippers.map(shipper => {
                                                     return (
-                                                        <option key={shipper._id} value={shipper._id}>{shipper.username}</option>
+                                                        <option key={shipper._id} value={shipper}>{shipper.username}</option>
                                                     );
                                                 })}
                                             </NativeSelect>
@@ -117,7 +139,7 @@ const EditShipment = ({ match }) => {
                                             >
                                                 {couriers.map(courier => {
                                                     return (
-                                                        <option key={courier._id} value={courier._id}>{courier.username}</option>
+                                                        <option key={courier._id} value={courier}>{courier.username}</option>
                                                     );
                                                 })}
                                             </NativeSelect>

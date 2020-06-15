@@ -68,7 +68,7 @@ export const getOtherUsers = (token, userId) => {
         try {
             const response = await expressServer.get('/api/users', { headers: { 'x-auth-token': token }});
 
-            const otherUsers = response.data.filter(userObject => userObject._id !== userId);
+            const otherUsers = response.data;
             
             const shippers = otherUsers.filter(userObject => userObject.isShipper);
             const couriers = otherUsers.filter(userObject => userObject.isCourier);
