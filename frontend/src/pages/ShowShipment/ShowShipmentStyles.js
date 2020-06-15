@@ -31,5 +31,9 @@ export const useStyles = makeStyles(theme => ({
     logoStyle: {
         height: 'auto',
         width: '25%'
+    },
+    tableGridStyle: {
+        padding: '2rem 0',
+        width: '90%'
     }
 }));
