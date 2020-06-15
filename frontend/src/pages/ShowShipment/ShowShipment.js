@@ -36,69 +36,71 @@ const ShowShipment = ({ match }) => {
                         />
                     </Grid>
                     <Grid container item xs={8} sm={8} md={8} lg={8} xl={8} alignItems='center' direction='column' className={classes.subGridContainerStyle}>
-                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
-                            <Typography
-                                variant='h6'
-                                className={classes.headerTextStyle}
-                            >
-                                Shipment #{match.params.id}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
-                            <Typography
-                                variant='body1'
-                                className={classes.textStyle}
-                            >
-                                Status - {showShipment.status}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
-                            <Typography
-                                variant='body1'
-                                className={classes.textStyle}
-                            >
-                                Posted Date - {showShipment.postDate ? showShipment.postDate.substring(0, 10) : 'n/a'}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
-                            <Typography
-                                variant='body1'
-                                className={classes.textStyle}
-                            >
-                                Shipper - {showShipment.shipper ? showShipment.shipper.username : 'n/a'}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
-                            <Typography
-                                variant='body1'
-                                className={classes.textStyle}
-                            >
-                                Courier - {showShipment.courier ? showShipment.courier.username : 'n/a'}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
-                            <Typography
-                                variant='body1'
-                                className={classes.textStyle}
-                            >
-                                Start Date - {showShipment.startDate ? showShipment.startDate.substring(0, 10) : 'n/a'}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
-                            <Typography
-                                variant='body1'
-                                className={classes.textStyle}
-                            >
-                                Delivered Date - {showShipment.deliveredDate ? showShipment.deliveredDate.substring(0, 10) : 'n/a'}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
-                            <Typography
-                                variant='body1'
-                                className={classes.textStyle}
-                            >
-                                Comment(s) - {showShipment.comments ? showShipment.comments : 'n/a'}
-                            </Typography>
+                        <Grid xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.contentGridContainerStyle}>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='h6'
+                                    className={classes.headerTextStyle}
+                                >
+                                    Shipment #{match.params.id}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='body1'
+                                    className={classes.textStyle}
+                                >
+                                    Status: <br /><strong>{showShipment.status}</strong>
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='body1'
+                                    className={classes.textStyle}
+                                >
+                                    Posted Date - <br /><strong>{showShipment.postDate ? showShipment.postDate.substring(0, 10) : 'n/a'}</strong>
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='body1'
+                                    className={classes.textStyle}
+                                >
+                                    Shipper - <br /><strong>{showShipment.shipper ? showShipment.shipper.username : 'n/a'}</strong>
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='body1'
+                                    className={classes.textStyle}
+                                >
+                                    Courier - <br /><strong>{showShipment.courier ? showShipment.courier.username : 'n/a'}</strong>
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='body1'
+                                    className={classes.textStyle}
+                                >
+                                    Start Date - <br /><strong>{showShipment.startDate ? showShipment.startDate.substring(0, 10) : 'n/a'}</strong>
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='body1'
+                                    className={classes.textStyle}
+                                >
+                                    Delivered Date - <br /><strong>{showShipment.deliveredDate ? showShipment.deliveredDate.substring(0, 10) : 'n/a'}</strong>
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.gridItemStyle}>
+                                <Typography
+                                    variant='body1'
+                                    className={classes.textStyle}
+                                >
+                                    Comment(s) - <br /><strong>{showShipment.comments ? showShipment.comments : 'n/a'}</strong>
+                                </Typography>
+                            </Grid>
                         </Grid>
                         <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.tableGridStyle}>
                             <MaterialTable

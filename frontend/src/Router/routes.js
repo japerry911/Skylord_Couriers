@@ -47,7 +47,7 @@ export default () => {
                     component={Dashboard}
                 />
 
-                <ProtectedRoute
+                <Route
                     exact
                     path='/:type/postings'
                     component={Postings}
@@ -59,7 +59,7 @@ export default () => {
                     component={Profile}
                 />
 
-                <ProtectedRoute
+                <Route
                     exact
                     path='/:type/shipments/:id'
                     component={ShowShipment}
