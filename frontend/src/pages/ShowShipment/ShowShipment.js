@@ -4,6 +4,7 @@ import { getShipment } from '../../redux/actions/shipmentActions';
 import LoadingOverlay from 'react-loading-overlay';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import MaterialTable from 'material-table';
 import { useStyles } from './ShowShipmentStyles';
 
 const ShowShipment = ({ match }) => {
@@ -98,6 +99,16 @@ const ShowShipment = ({ match }) => {
                             >
                                 Comment(s) - {showShipment.comments ? showShipment.comments : 'n/a'}
                             </Typography>
+                        </Grid>
+                        <Grid item xs={10} sm={10} md={10} lg={10} xl={10} align='center' className={classes.tableGridStyle}>
+                            <MaterialTable
+                                columns={[
+                                    { title: 'Good Name', field: 'name' },
+                                    { title: 'Weight (lbs)', field: 'weight' }
+                                ]}
+                                data={showShipment.goods}
+                                title='Shipping Goods Table'
+                            />
                         </Grid>
                     </Grid>
                 </Grid>

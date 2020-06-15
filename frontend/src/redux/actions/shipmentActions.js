@@ -51,6 +51,10 @@ export const getShipment = (token, id) => {
                 showShipment: response.data
             };
 
+            const totalWeight = successObject.showShipment.goods.reduce((accumulator, currentValue) => accumulator + currentValue.weight, 0);
+
+            successObject.showShipment.goods.push({ 'name': '', 'weight': '' }, { 'name': 'Total:', 'weight': totalWeight });
+
             dispatch(shipmentSuccess(successObject));
         } catch (error) {
             dispatch(shipmentError(error.response.data));
