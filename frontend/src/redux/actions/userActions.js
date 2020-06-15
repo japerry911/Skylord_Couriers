@@ -60,3 +60,28 @@ export const userSignOut = () => {
         type: 'USER_SIGN_OUT'
     };
 };
+
+export const getOtherUsers = (token, userId) => {
+    return async dispatch => {
+        dispatch(userPending());
+
+        try {
+            const response = await expressServer.get('/api/users', { headers: { 'x-auth-token': token }});
+
+            const otherUsers = response.data;
+            
+            const shippers = otherUsers.filter(userObject => userObject.isShipper);
+            const couriers = otherUsers.filter(userObject => userObject.isCourier);
+
+            const successObject = {
+                shippers,
+                couriers
+            };
+
+            dispatch(userSuccess(successObject));
+        } catch (error) {
+            dispatch(userError(error.response.data));
+            throw Error(error.response.data);
+        }
+    };
+};

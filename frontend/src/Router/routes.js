@@ -8,6 +8,7 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import Postings from '../pages/Postings/Postings';
 import Profile from '../pages/Profile/Profile';
 import ShowShipment from '../pages/ShowShipment/ShowShipment';
+import EditShipment from '../pages/EditShipment/EditShipment';
 import ScrollToTop from '../misc/ScrollToTop';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -47,7 +48,7 @@ export default () => {
                     component={Dashboard}
                 />
 
-                <Route
+                <ProtectedRoute
                     exact
                     path='/:type/postings'
                     component={Postings}
@@ -59,10 +60,16 @@ export default () => {
                     component={Profile}
                 />
 
-                <Route
+                <ProtectedRoute
                     exact
                     path='/:type/shipments/:id'
                     component={ShowShipment}
+                />
+
+                <ProtectedRoute
+                    exact
+                    path='/:type/shipments/:id/edit'
+                    component={EditShipment}
                 />
             </Switch>
         </Fragment>

@@ -62,3 +62,17 @@ export const getShipment = (token, id) => {
         }
     };
 };
+
+export const updateShipment = (token, shipmentId, shipment) => {
+    return async dispatch => {
+        dispatch(shipmentPending());
+
+        try {
+            await expressServer.put(`/api/shipments/${shipmentId}`, shipment, { headers: { 'x-auth-token': token }});
+            dispatch(shipmentSuccess({}));
+        } catch (error) {
+            dispatch(shipmentError(error.response.data));
+            throw Error(error.response.data);
+        }
+    };
+};
