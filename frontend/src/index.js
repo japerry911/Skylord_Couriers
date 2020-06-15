@@ -8,6 +8,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import allReducers from './redux/reducers/index';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 const store = createStore(
   allReducers,
@@ -17,7 +19,9 @@ const store = createStore(
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <App />
+      </MuiPickersUtilsProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')

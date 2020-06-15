@@ -8,6 +8,8 @@ import { getOtherUsers } from '../../redux/actions/userActions';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
+import { DateTimePicker } from '@material-ui/pickers';
+import TextField from '@material-ui/core/TextField';
 import { useStyles } from './EditShipmentStyles';
 
 const EditShipment = ({ match }) => {
@@ -16,6 +18,8 @@ const EditShipment = ({ match }) => {
     const [courier, setCourier] = useState('');
     const [shipper, setShipper] = useState('');
     const [status, setStatus] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
+    const [deliveredDate, setDeliveredDate] = useState(new Date());
 
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.user.isLoading);
@@ -35,6 +39,8 @@ const EditShipment = ({ match }) => {
         setStatus(showShipment.status);
         if (showShipment.courier) setCourier(showShipment.courier._id);
         if (showShipment.shipper) setShipper(showShipment.shipper._id);
+        if (showShipment.startDate) setStartDate(showShipment.startDate);
+        if (showShipment.deliveredDate) setDeliveredDate(showShipment.deliveredDate);
     }, [showShipment]);
         
     return (
@@ -119,6 +125,36 @@ const EditShipment = ({ match }) => {
                                                 })}
                                             </NativeSelect>
                                         </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
+                                        <DateTimePicker
+                                            label='Posted Date'
+                                            value={showShipment.postDate}
+                                            className={classes.formControlStyle}
+                                            disabled
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
+                                        <DateTimePicker
+                                            autoOk
+                                            label='Start Date'
+                                            clearable
+                                            value={startDate}
+                                            onChange={setStartDate}
+                                            className={classes.formControlStyle}
+                                            disableFuture
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
+                                        <DateTimePicker
+                                            autoOk
+                                            label='Delivered Date'
+                                            clearable
+                                            value={deliveredDate}
+                                            onChange={setDeliveredDate}
+                                            className={classes.formControlStyle}
+                                            disableFuture
+                                        />
                                     </Grid>
                                 </form>
                             </Grid>
