@@ -11,6 +11,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { DateTimePicker } from '@material-ui/pickers';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Button from '@material-ui/core/Button';
 import { useStyles } from './EditShipmentStyles';
 
 const EditShipment = ({ match }) => {
@@ -22,6 +24,8 @@ const EditShipment = ({ match }) => {
     const [startDate, setStartDate] = useState(new Date());
     const [deliveredDate, setDeliveredDate] = useState(new Date());
     const [price, setPrice] = useState(0);
+    const [comments, setComments] = useState('');
+    const [validation, setValidation] = useState(false);
 
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.user.isLoading);
@@ -40,12 +44,21 @@ const EditShipment = ({ match }) => {
     useEffect(() => {
         setStatus(showShipment.status);
         setPrice(showShipment.price);
+        setComments(showShipment.comments);
         if (showShipment.courier) setCourier(showShipment.courier._id);
         if (showShipment.shipper) setShipper(showShipment.shipper._id);
         if (showShipment.startDate) setStartDate(showShipment.startDate);
         if (showShipment.deliveredDate) setDeliveredDate(showShipment.deliveredDate);
     }, [showShipment]);
-    console.log(price);
+
+    useEffect(() => {
+        setValidation(status && price);
+    }, [status, price]);
+
+    const handleSubmit = event => {
+        event.preventDefault();
+    };
+
     return (
         <Fragment>
             <LoadingOverlay
@@ -71,7 +84,7 @@ const EditShipment = ({ match }) => {
                                     Updates for Shipment #{match.params.id}
                                 </Typography>
                             <Grid container item xs={12} sm={12} md={12} lg={12} xl={12} align='center'>
-                                <form className={classes.formContainerStyle}>
+                                <form className={classes.formContainerStyle} onSubmit={handleSubmit}>
                                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
                                         <FormControl className={classes.formControlStyle}>
                                             <InputLabel shrink htmlFor='shipper-select'>
@@ -130,34 +143,37 @@ const EditShipment = ({ match }) => {
                                         </FormControl>
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
-                                        <DateTimePicker
-                                            label='Posted Date'
-                                            value={showShipment.postDate}
-                                            className={classes.formControlStyle}
-                                            disabled
-                                        />
+                                        <FormControl className={classes.formControlStyle}>
+                                            <DateTimePicker
+                                                label='Posted Date'
+                                                value={showShipment.postDate}
+                                                disabled
+                                            />
+                                        </FormControl>
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
-                                        <DateTimePicker
-                                            autoOk
-                                            label='Start Date'
-                                            clearable
-                                            value={startDate}
-                                            onChange={setStartDate}
-                                            className={classes.formControlStyle}
-                                            disableFuture
-                                        />
+                                        <FormControl className={classes.formControlStyle}>
+                                            <DateTimePicker
+                                                autoOk
+                                                label='Start Date'
+                                                clearable
+                                                value={startDate}
+                                                onChange={setStartDate}
+                                                disableFuture
+                                            />
+                                        </FormControl>
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
-                                        <DateTimePicker
-                                            autoOk
-                                            label='Delivered Date'
-                                            clearable
-                                            value={deliveredDate}
-                                            onChange={setDeliveredDate}
-                                            className={classes.formControlStyle}
-                                            disableFuture
-                                        />
+                                        <FormControl className={classes.formControlStyle}>
+                                            <DateTimePicker
+                                                autoOk
+                                                label='Delivered Date'
+                                                clearable
+                                                value={deliveredDate}
+                                                onChange={setDeliveredDate}
+                                                disableFuture
+                                            />
+                                        </FormControl>
                                     </Grid>
                                     <Grid item xs={12} sm={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
                                         <FormControl className={classes.formControlStyle}>
@@ -171,6 +187,25 @@ const EditShipment = ({ match }) => {
                                                 }}
                                             />
                                         </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
+                                        <FormControl className={classes.formControlStyle}>
+                                            <TextareaAutosize
+                                                label='Comment(s)'
+                                                value={comments}
+                                                onChange={e => setComments(e.target.value)}
+                                                rowsMin={5}
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
+                                        <Button
+                                            variant='contained'
+                                            disabled={!validation}
+                                            type='submit'
+                                        >
+                                            Submit Edits
+                                        </Button>
                                     </Grid>
                                 </form>
                             </Grid>
