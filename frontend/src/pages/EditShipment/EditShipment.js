@@ -10,6 +10,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import { DateTimePicker } from '@material-ui/pickers';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { useStyles } from './EditShipmentStyles';
 
 const EditShipment = ({ match }) => {
@@ -20,6 +21,7 @@ const EditShipment = ({ match }) => {
     const [status, setStatus] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [deliveredDate, setDeliveredDate] = useState(new Date());
+    const [price, setPrice] = useState(0);
 
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.user.isLoading);
@@ -37,12 +39,13 @@ const EditShipment = ({ match }) => {
 
     useEffect(() => {
         setStatus(showShipment.status);
+        setPrice(showShipment.price);
         if (showShipment.courier) setCourier(showShipment.courier._id);
         if (showShipment.shipper) setShipper(showShipment.shipper._id);
         if (showShipment.startDate) setStartDate(showShipment.startDate);
         if (showShipment.deliveredDate) setDeliveredDate(showShipment.deliveredDate);
     }, [showShipment]);
-        
+    console.log(price);
     return (
         <Fragment>
             <LoadingOverlay
@@ -99,7 +102,7 @@ const EditShipment = ({ match }) => {
                                                 name='Courier'
                                                 inputProps={{ name: 'Courier', id: 'courier-select' }}
                                             >
-                                                {shippers.map(courier => {
+                                                {couriers.map(courier => {
                                                     return (
                                                         <option key={courier._id} value={courier._id}>{courier.username}</option>
                                                     );
@@ -155,6 +158,19 @@ const EditShipment = ({ match }) => {
                                             className={classes.formControlStyle}
                                             disableFuture
                                         />
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} lg={12} xl={12} align='center' className={classes.gridItemStyle}>
+                                        <FormControl className={classes.formControlStyle}>
+                                            <TextField
+                                                label='Price'
+                                                value={price}
+                                                type='number'
+                                                onChange={e => setPrice(e.target.value)}
+                                                InputProps={{
+                                                    startAdornment: <InputAdornment position='start'>$</InputAdornment>
+                                                }}
+                                            />
+                                        </FormControl>
                                     </Grid>
                                 </form>
                             </Grid>
