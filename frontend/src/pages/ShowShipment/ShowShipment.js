@@ -28,8 +28,8 @@ const ShowShipment = ({ match, history }) => {
         if (showShipment.shipper) idArray.push(showShipment.shipper._id);
         if (showShipment.courier) idArray.push(showShipment.courier._id);
         
-        if (idArray.indexOf(userId) && userId) {
-            alert('Valid');
+        if (idArray.indexOf(userId) > -1 && userId) {
+            history.push(`/${match.params.type}/shipments/${match.params.id}/edit`);
         } else {
             alert('You are not able to Update/Edit this shipment, it is not yours.');
         }
