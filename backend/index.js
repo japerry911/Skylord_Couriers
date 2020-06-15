@@ -23,7 +23,7 @@ app.use('/api/contact', contact);
 app.use('/api/shipments', shipments);
 app.use('/api/goods', goods);
 
-mongoose.connect('mongodb://localhost/skylordCouriers', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true })
+mongoose.connect('mongodb://localhost/skylordCouriers', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => console.log('Successfully connected to MongoDB...'))
     .catch(error => console.error(`Failed to connect to MongoDB - ${error}`));
 

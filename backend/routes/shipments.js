@@ -74,8 +74,52 @@ router.put('/:id', auth, async (req, res) => {
         return res.status(400).send(`Error(s): ${errors.join(', ')}`);
     }
 
+    let shipUser = false;
+    if (req.body.shipperId) {
+        shipUser = await User.findById(req.body.shipperId);
+        
+        if (!shipUser) {
+            return res.status(400).send('Shipper cannot be found.');
+        }
+    }
+
+    let courierUser = false;
+    if (req.body.courierId) {
+        courierUser = await User.findById(req.body.courierId);
+
+        if (!courierUser) {
+            return res.status(400).send('Courier cannot be found.');
+        }
+    }
+
+    let goods = [];
+    if (req.body.goodIds) {
+        for (let i = 0; i < req.body.goodIds.length; i++) {
+            const good = await Good.findById(req.body.goodIds[i]);
+
+            if (!good) {
+                return res.status(400).send(`Good ${req.body.goodIds[i]} Not Found.`);
+            }
+
+            goods.push(good);
+        }
+    }
+
+    const updatedShipmentBody = {
+        price: req.body.price,
+        status: req.body.status,
+        goods
+    };
+
+    if (shipUser) updatedShipmentBody.shipper = { _id: shipUser._id, username: shipUser.username };
+    if (courierUser) updatedShipmentBody.courier = { _id: courierUser._id, username: courierUser.username };
+    if (req.body.startDate) updatedShipmentBody.startDate = req.body.startDate;
+    if (req.body.postDate) updatedShipmentBody.postDate = req.body.postDate;
+    if (req.body.deliveredDate) updatedShipmentBody.deliveredDate = req.body.deliveredDate;
+    if (req.body.comments) updatedShipmentBody.comments = req.body.comments;
+
     try {
-        const result = await Shipment.findByIdAndUpdate(req.params.id, { ...req.body });
+        const result = await Shipment.findByIdAndUpdate(req.params.id, { ...updatedShipmentBody });
         
         if (!result) {
             return res.status(400).send('Shipment Not Found.');
