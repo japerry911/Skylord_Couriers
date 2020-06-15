@@ -46,8 +46,8 @@ const EditShipment = ({ match, history }) => {
         setStatus(showShipment.status);
         setPrice(showShipment.price);
         setComments(showShipment.comments);
-        if (showShipment.courier) setCourier(showShipment.courier._id);
-        if (showShipment.shipper) setShipper(showShipment.shipper._id);
+        if (showShipment.courier) setCourier(JSON.stringify(showShipment.courier));
+        if (showShipment.shipper) setShipper(JSON.stringify(showShipment.shipper));
         if (showShipment.startDate) setStartDate(showShipment.startDate);
         if (showShipment.deliveredDate) setDeliveredDate(showShipment.deliveredDate);
     }, [showShipment]);
@@ -65,12 +65,12 @@ const EditShipment = ({ match, history }) => {
         updateShipmentObject.price = price;
         updateShipmentObject.comments = comments;
         updateShipmentObject.goodIds = showShipment.goods.filter(goodObject => goodObject._id).map(goodObject => goodObject._id);
-        if (courier) updateShipmentObject.courierId = courier;
-        if (shipper) updateShipmentObject.shipperId = shipper;
+        if (courier) updateShipmentObject.courierId = JSON.parse(courier)._id;
+        if (shipper) updateShipmentObject.shipperId = JSON.parse(shipper)._id;
         if (startDate) updateShipmentObject.startDate = startDate;
         if (deliveredDate) updateShipmentObject.deliveredDate = deliveredDate;
         if (status) updateShipmentObject.status = status;
-        
+        console.log(shipmentId);
         try {
             await dispatch(updateShipment(token, shipmentId, updateShipmentObject));
          
@@ -120,7 +120,7 @@ const EditShipment = ({ match, history }) => {
                                             >
                                                 {shippers.map(shipper => {
                                                     return (
-                                                        <option key={shipper._id} value={shipper}>{shipper.username}</option>
+                                                        <option key={shipper._id} value={JSON.stringify(shipper)}>{shipper.username}</option>
                                                     );
                                                 })}
                                             </NativeSelect>
@@ -139,7 +139,7 @@ const EditShipment = ({ match, history }) => {
                                             >
                                                 {couriers.map(courier => {
                                                     return (
-                                                        <option key={courier._id} value={courier}>{courier.username}</option>
+                                                        <option key={courier._id} value={JSON.stringify(courier)}>{courier.username}</option>
                                                     );
                                                 })}
                                             </NativeSelect>
