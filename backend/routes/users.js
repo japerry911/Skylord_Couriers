@@ -10,6 +10,20 @@ router.get('/me', auth, async (req, res) => {
     res.send(user);
 });
 
+router.get('/', auth, async (req, res) => {
+    try {
+        const users = await User.find().select('-password');
+
+        if (!users) {
+            return res.status(400).send('No Users Found.');
+        }
+
+        res.status(200).send(users);
+    } catch (error) {
+        res.status(400).send(`Server Error: ${error}`);
+    }
+});
+
 router.post('/', async (req, res) => {
     const { error } = validateUser(req.body);
 

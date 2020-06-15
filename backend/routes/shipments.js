@@ -87,7 +87,7 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
-router.get('/', /*[auth],*/ async (req, res) => {
+router.get('/', [auth], async (req, res) => {
     try {
         const shipments = await Shipment.find();
 
@@ -101,7 +101,7 @@ router.get('/', /*[auth],*/ async (req, res) => {
     }
 });
 
-router.get('/:id', /*[auth],*/ async (req, res) => {
+router.get('/:id', [auth], async (req, res) => {
     try {
         let shipment = await Shipment.findById(req.params.id);
 
