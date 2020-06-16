@@ -64,11 +64,9 @@ function validateShipment(shipment) {
         courierId: Joi.objectId(),
         shipperId: Joi.objectId().disallow(Joi.ref('courierId')),
         price: Joi.number().min(1.00).max(10000).required(),
-        startDate: Joi.date(),
-        endDate: Joi.date(),
         postDate: Joi.date(),
-        startDate: Joi.date(),
-        deliveredDate: Joi.date(),
+        startDate: Joi.alternatives().try(Joi.date(), Joi.string().valid('remove')),
+        deliveredDate: Joi.alternatives().try(Joi.date(), Joi.string().valid('remove')),
         status: Joi.string().valid(['Not Claimed', 'Pending Delivery', 'Successful Delivery', 'Failed Delivery']).required(),
         comments: Joi.string(),
         goodIds: Joi.array().items(Joi.string()).required()

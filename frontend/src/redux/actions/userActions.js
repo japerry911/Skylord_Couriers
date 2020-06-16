@@ -61,7 +61,7 @@ export const userSignOut = () => {
     };
 };
 
-export const getOtherUsers = (token, userId) => {
+export const getOtherUsers = (token) => {
     return async dispatch => {
         dispatch(userPending());
 

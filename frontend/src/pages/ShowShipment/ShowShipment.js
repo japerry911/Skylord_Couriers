@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import MaterialTable from 'material-table';
 import Button from '@material-ui/core/Button';
+import { handleOpen } from '../../redux/actions/toastActions';
 import { useStyles } from './ShowShipmentStyles';
 
 const ShowShipment = ({ match, history }) => {
@@ -14,12 +15,15 @@ const ShowShipment = ({ match, history }) => {
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.shipments.isLoading);
     const showShipment = useSelector(state => state.shipments.showShipment);
-    const error = useSelector(state => state.shipments.error);
     const token = useSelector(state => state.user.token);
     const userId = useSelector(state => state.user.user._id);
 
     useEffect(() => {
-        dispatch(getShipment(token, match.params.id));
+        try {
+            dispatch(getShipment(token, match.params.id));
+        } catch (error) {
+            dispatch(handleOpen({ type: 'error', message: `Error: ${error}` }));
+        }
     }, [dispatch, token, match.params.id]);
     
     const onUpdateClick = event => {

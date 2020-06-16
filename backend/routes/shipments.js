@@ -110,13 +110,29 @@ router.put('/:id', auth, async (req, res) => {
         status: req.body.status,
         goods
     };
-
+    
     if (shipUser) updatedShipmentBody.shipper = { _id: shipUser._id, username: shipUser.username };
     if (courierUser) updatedShipmentBody.courier = { _id: courierUser._id, username: courierUser.username };
-    if (req.body.startDate) updatedShipmentBody.startDate = req.body.startDate;
+
+    if (req.body.startDate && req.body.startDate !== 'remove') {
+        updatedShipmentBody.startDate = req.body.startDate;
+    } else if (req.body.startDate === 'remove') {
+        updatedShipmentBody.startDate = undefined;
+    }
+
     if (req.body.postDate) updatedShipmentBody.postDate = req.body.postDate;
-    if (req.body.deliveredDate) updatedShipmentBody.deliveredDate = req.body.deliveredDate;
-    if (req.body.comments) updatedShipmentBody.comments = req.body.comments;
+
+    if (req.body.deliveredDate && req.body.deliveredDate !== 'remove') {
+        updatedShipmentBody.deliveredDate = req.body.deliveredDate;
+    } else if (req.body.deliveredDate === 'remove') {
+        updatedShipmentBody.deliveredDate = undefined;
+    }
+
+    if (req.body.comments && req.body.comments !== 'remove') {
+        updatedShipmentBody.comments = req.body.comments;
+    } else if (req.body.comments === 'remove') {
+        updatedShipmentBody.comments = undefined;
+    }
 
     try {
         const result = await Shipment.findByIdAndUpdate(req.params.id, { ...updatedShipmentBody });

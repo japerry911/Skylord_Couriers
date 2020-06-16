@@ -6,7 +6,6 @@ import Contact from '../pages/Contact/Contact';
 import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Postings from '../pages/Postings/Postings';
-import Profile from '../pages/Profile/Profile';
 import ShowShipment from '../pages/ShowShipment/ShowShipment';
 import EditShipment from '../pages/EditShipment/EditShipment';
 import ScrollToTop from '../misc/ScrollToTop';

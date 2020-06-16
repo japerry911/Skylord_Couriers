@@ -22,23 +22,21 @@ const EditShipment = ({ match, history }) => {
     const [courier, setCourier] = useState('');
     const [shipper, setShipper] = useState('');
     const [status, setStatus] = useState('');
-    const [startDate, setStartDate] = useState(new Date());
-    const [deliveredDate, setDeliveredDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(null);
+    const [deliveredDate, setDeliveredDate] = useState(null);
     const [price, setPrice] = useState(0);
     const [comments, setComments] = useState('');
     const [validation, setValidation] = useState(false);
 
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.user.isLoading);
-    const error = useSelector(state => state.user.error);
     const token = useSelector(state => state.user.token);
     const showShipment = useSelector(state => state.shipments.showShipment);
-    const userId = useSelector(state => state.user.user._id);
     const couriers = useSelector(state => state.user.couriers);
     const shippers = useSelector(state => state.user.shippers);
 
     useEffect(() => {
-        dispatch(getOtherUsers(token, userId));
+        dispatch(getOtherUsers(token));
         dispatch(getShipment(token, match.params.id));
     }, [dispatch, token, match.params.id]);
 
@@ -63,14 +61,28 @@ const EditShipment = ({ match, history }) => {
         const updateShipmentObject = {};
 
         updateShipmentObject.price = price;
-        updateShipmentObject.comments = comments;
         updateShipmentObject.goodIds = showShipment.goods.filter(goodObject => goodObject._id).map(goodObject => goodObject._id);
         if (courier) updateShipmentObject.courierId = JSON.parse(courier)._id;
         if (shipper) updateShipmentObject.shipperId = JSON.parse(shipper)._id;
-        if (startDate) updateShipmentObject.startDate = startDate;
-        if (deliveredDate) updateShipmentObject.deliveredDate = deliveredDate;
+
+        if (comments) {
+            updateShipmentObject.comments = comments;
+        } else {
+            updateShipmentObject.comments = 'remove';
+        }
+
+        if (startDate) {
+            updateShipmentObject.startDate = startDate;
+        } else {
+            updateShipmentObject.startDate = 'remove';
+        }
+        if (deliveredDate) {
+            updateShipmentObject.deliveredDate = deliveredDate;
+        } else {
+            updateShipmentObject.deliveredDate = 'remove';
+        }
         if (status) updateShipmentObject.status = status;
-        console.log(shipmentId);
+
         try {
             await dispatch(updateShipment(token, shipmentId, updateShipmentObject));
          

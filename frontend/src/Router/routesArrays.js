@@ -4,7 +4,6 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import PersonIcon from '@material-ui/icons/Person'
 import InboxIcon from '@material-ui/icons/Inbox';
 import ListIcon from '@material-ui/icons/List';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export const NON_AUTH_ROUTES_ARRAY = [
     { link: '/', title: 'Home', Icon: HomeIcon },
