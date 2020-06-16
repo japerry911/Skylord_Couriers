@@ -18,8 +18,7 @@ export const AUTH_SHIPPER_ROUTES_ARRAY = [
     { link: '/about', title: 'About', Icon: InfoIcon },
     { link: '/contact', title: 'Contact', Icon: PhoneIcon },
     { link: '/shipper/dashboard', title: 'Dashboard', Icon: InboxIcon },
-    { link: '/shipper/postings', title: 'Postings', Icon: ListIcon },
-    { link: '/shipper/profile', title: 'Profile', Icon: AccountCircleIcon }
+    { link: '/shipper/postings', title: 'Postings', Icon: ListIcon }
 ];
 
 export const AUTH_COURIER_ROUTES_ARRAY = [
@@ -27,6 +26,5 @@ export const AUTH_COURIER_ROUTES_ARRAY = [
     { link: '/about', title: 'About', Icon: InfoIcon },
     { link: '/contact', title: 'Contact', Icon: PhoneIcon },
     { link: '/courier/dashboard', title: 'Dashboard', Icon: InboxIcon },
-    { link: '/courier/postings', title: 'Postings', Icon: ListIcon },
-    { link: '/shipper/profile', title: 'Profile', Icon: AccountCircleIcon }
+    { link: '/courier/postings', title: 'Postings', Icon: ListIcon }
 ];

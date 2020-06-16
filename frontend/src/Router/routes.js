@@ -56,12 +56,6 @@ export default () => {
 
                 <ProtectedRoute
                     exact
-                    path='/:type/profile'
-                    component={Profile}
-                />
-
-                <ProtectedRoute
-                    exact
                     path='/:type/shipments/:id'
                     component={ShowShipment}
                 />
